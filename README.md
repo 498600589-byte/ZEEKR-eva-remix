@@ -1,16 +1,16 @@
-# Customize the Zeekr EVA Robot’s Expressions
+# Zeekr EVA Remix
 
-Connect an EVA robot to Windows, open its USB resource drive, and try a JoJo-inspired expression. The walkthrough and case below use an EVA ICR10Z1A with resource version `0.0.14`.
+Connect your EVA robot to Windows, back up its USB resource drive, and try a JoJo-inspired expression. The guide includes three Lottie samples, a reversible swap tool, and a before-and-after case study. We used an EVA ICR10Z1A with resource version `0.0.14`.
 
 ![JoJo-inspired EVA case study showing three original expressions next to their redesigned versions](docs/jojo-case.png)
 
-## Follow AGao on the Road
+## Find AGao on the Road
 
 Search for **阿糕在路上** on **Douyin**, **Xiaohongshu (REDnote)**, or **WeChat Channels**. The original sample expressions in this repository are free to download.
 
 ## 1. Connect EVA to Windows
 
-Use a USB-C cable that supports data, connect EVA directly to the computer, and open **Device Manager → Ports (COM & LPT)**. EVA appeared as two USB serial ports on our machine. One carries logs. The other answers service commands such as `GET` and `OPEN`. Use the port numbers shown on your machine.
+Connect EVA directly to your Windows PC with a USB-C data cable. Open **Device Manager → Ports (COM & LPT)** and look for the two serial ports that appear when EVA is connected. One carries logs. The other accepts commands and answers `GET` with a memory report.
 
 To inspect the ports from PowerShell, run:
 
@@ -20,7 +20,7 @@ To inspect the ports from PowerShell, run:
 
 ## 2. Open the EVA resource drive
 
-Set `$evaPort` to the EVA command port. The script checks for an EVA memory response before sending `OPEN`. On our unit, the serial ports disappeared and Windows mounted a removable drive named **TinyUSB Flash Storage**. The drive letter was `H:`.
+Set `$evaPort` to EVA's command port. `COM4` is the port we used. The script checks for `total ram` in the `GET` response before sending `OPEN`. Windows then switches EVA from two serial ports to a removable **TinyUSB Flash Storage** drive. Ours mounted as `H:`.
 
 ```powershell
 $evaPort = 'COM4'
@@ -41,7 +41,7 @@ try {
 }
 ```
 
-Wait a few seconds, then confirm that the drive contains both files below. `OPEN` is the resource-drive command. The touchscreen factory test menu is optional.
+Wait a few seconds, then open the new drive in File Explorer. Check for both files below before backing up or writing anything. You can open the resource drive from the command port while EVA is in its normal mode.
 
 ```text
 local/EmojiMapList.json
@@ -50,7 +50,7 @@ local/emoji/EmojiList.json
 
 ## 3. Back up the drive
 
-Replace `H:\` with the EVA drive letter and copy the drive to a new local folder. Keep this copy for restoring the original artwork and file manifest.
+Replace `H:\` with the drive letter assigned to EVA. Copy the drive to a new local folder so you can restore the original artwork and its file manifest later.
 
 ```powershell
 robocopy 'H:\' '.\eva-backup' /E /COPY:DAT /R:1 /W:1 /XD 'System Volume Information' 'SYSTEM~1'
@@ -58,7 +58,7 @@ robocopy 'H:\' '.\eva-backup' /E /COPY:DAT /R:1 /W:1 /XD 'System Volume Informat
 
 Check that the backup contains `version.txt` and both JSON files listed above. The replacement tool checks the original expression byte for byte and verifies its CRC against the backup before it writes.
 
-## 4. Try a different expression style
+## 4. Swap a Lottie expression
 
 The mapping in `EmojiMapList.json` connects expression IDs to filenames. Keep the existing ID and format to preserve the event that selects the expression. The original coordinates in our samples are already oriented for the EVA screen.
 
@@ -74,7 +74,7 @@ Start with a single Lottie expression. The command below uses Python 3.10 or lat
 python tools/replace_lottie.py apply --drive 'H:\' --backup '.\eva-backup' --id 50 --input '.\examples\jojo\Happy.json'
 ```
 
-Safely eject the removable drive, then disconnect and reconnect EVA so it reloads its resources. Trigger the corresponding expression through the car to check how it looks on screen. When trying other designs, keep navigation, charge, seat belt, and warning icons legible.
+Safely eject the drive, then disconnect and reconnect EVA to reload its resources. For playback, trigger the matching event through the car. Keep navigation, charging, seat belt, and warning icons legible when designing your own expressions.
 
 To undo the example, open the resource drive again and restore the same ID from your backup:
 
@@ -83,6 +83,15 @@ python tools/replace_lottie.py restore --drive 'H:\' --backup '.\eva-backup' --i
 ```
 
 The tool restores the selected asset and its CRC entry. Keep a fresh full backup if you are working on several versions of the pack.
+
+## Troubleshooting
+
+| What you see | What to check |
+| --- | --- |
+| `GET` returns no memory report. | Confirm which two ports appeared when EVA was connected. Try the other EVA port and keep the newline in the command. |
+| The ports disappear after `OPEN`. | Give Windows a few seconds to mount the resource drive. Check **This PC** for a new removable drive containing `local/EmojiMapList.json`. |
+| The swap tool reports a CRC or backup mismatch. | Check that the backup came from the same EVA and compare its resource version. If the expression was already customized, restore its saved original before trying another swap. |
+| EVA still displays the same expression. | Reconnect after safely ejecting the drive, then trigger the selected expression through the paired car. The USB resource view is for accessing files. |
 
 ## Case study · The JoJo-inspired smirk pack
 
