@@ -1,8 +1,21 @@
 # Zeekr EVA Remix
 
-Connect your EVA robot to Windows, back up its USB resource drive, and try a JoJo-inspired expression. The guide includes three Lottie samples, a reversible swap tool, and a before-and-after case study. We used an EVA ICR10Z1A with resource version `0.0.14`.
+JoJo Motion v2 upgrades the screen expressions for the Zeekr EVA ICR10Z1A with resource version `0.0.14`. The new animations use anticipation, punch-in poses, sweeping speed lines, and expressive changes in timing. The pack updates 128 animations across 57 Lottie and 71 packed JPEG assets.
 
-![JoJo-inspired EVA case study showing three original expressions next to their redesigned versions](docs/jojo-case.png)
+[Download JoJo Motion v2](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.0.0/EVA_JOJO_Motion_v2.0.0.zip) · [Release notes](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.0.0) · [中文安装说明](docs/jojo-motion-v2.zh-CN.md)
+
+![Six EVA expressions animated in JoJo Motion v2, including Happy, Look, Blink, comfort, Acting Cute, and the dance loop](docs/jojo-motion-v2.gif)
+
+The release ZIP includes the complete pack, an offline side-by-side player, and a Windows installer for the stock resources or the verified previous JoJo pack. The installer backs up the current assets before writing and can restore them later. V2 passed file and frame checks and install/restore tests on copies of both supported resource sets. V2 playback on the EVA screen is still unverified.
+
+You can also try a single v2 Lottie sample using the guide below. Each sample is self-contained and matches the timing and canvas of its mapped expression.
+
+| ID | Expression | Sample |
+| --- | --- | --- |
+| 4 | Blink | [Blink.json](examples/jojo-v2/Blink.json) |
+| 22 | Look left and right | [Look.json](examples/jojo-v2/Look.json) |
+| 50 | Happy | [Happy.json](examples/jojo-v2/Happy.json) |
+| 104 | Comfort | [L00000104.json](examples/jojo-v2/L00000104.json) |
 
 ## Find AGao on the Road
 
@@ -68,10 +81,10 @@ The mapping in `EmojiMapList.json` connects expression IDs to filenames. Keep th
 | Packed JPEG frames (`type 1`) | The `.dat` container, frame dimensions, and playback sequence. Its little-endian header is described in the [DAT format notes](docs/dat-format.md). |
 | Static JPG | The filename, dimensions, and visible information in the original image. |
 
-Start with a single Lottie expression. The command below uses Python 3.10 or later and swaps **Happy (ID 50)** for the included [JoJo-inspired portrait](examples/jojo/Happy.json). It updates the matching CRC16 entry in `EmojiList.json` automatically.
+The command below uses Python 3.10 or later and swaps **Happy (ID 50)** for the [v2 animation](examples/jojo-v2/Happy.json). It updates the matching CRC16 entry in `EmojiList.json` automatically. For the first JoJo sample, use `examples\jojo\Happy.json` as the input.
 
 ```powershell
-python tools/replace_lottie.py apply --drive 'H:\' --backup '.\eva-backup' --id 50 --input '.\examples\jojo\Happy.json'
+python tools/replace_lottie.py apply --drive 'H:\' --backup '.\eva-backup' --id 50 --input '.\examples\jojo-v2\Happy.json'
 ```
 
 Safely eject the drive, then disconnect and reconnect EVA to reload its resources. For playback, trigger the matching event through the car. Keep navigation, charging, seat belt, and warning icons legible when designing your own expressions.
@@ -93,8 +106,10 @@ The tool restores the selected asset and its CRC entry. Keep a fresh full backup
 | The swap tool reports a CRC or backup mismatch. | Check that the backup came from the same EVA and compare its resource version. If the expression was already customized, restore its saved original before trying another swap. |
 | EVA still displays the same expression. | Reconnect after safely ejecting the drive, then trigger the selected expression through the paired car. The USB resource view is for accessing files. |
 
-## Case study · The JoJo-inspired smirk pack
+## Case study · The first JoJo pack
 
-We exaggerated the eye angles, added crooked smiles, and used ink slashes and halftone dots around the face. The case image shows actual frames from the original EVA assets and our finished pack. The included [Lottie samples](examples/jojo/) are standalone illustrations you can try one at a time.
+![Three original EVA expressions beside the first JoJo-style designs](docs/jojo-case.png)
 
-We wrote and read back **131 assets** on one EVA unit. The set covers **116 mapped IDs**, including nine previously missing files, plus 15 supplementary assets. Every changed asset passed the SHA-256 and CRC readback checks. Physical playback under each car-triggered event has yet to be verified.
+We exaggerated the eye angles, added crooked smiles, and used ink slashes and halftone dots around the face. Three [first-release Lottie samples](examples/jojo/) remain available.
+
+On one EVA unit, the first pack wrote and read back **131 assets** covering **116 mapped IDs** and 15 supplementary assets. Every changed asset passed SHA-256 and CRC readback checks. Playback for the car-triggered events was still pending.
