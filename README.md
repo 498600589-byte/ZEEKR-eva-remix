@@ -1,6 +1,6 @@
 # 奶龙上屏 · EVA 圆角方屏表情全集
 
-[在线浏览 116 项表情](https://498600589-byte.github.io/Zeekr-EVA-remix/#library) · [四款精选 GIF](media/nailoong-four.gif) · [静态对照图](media/preview.png) · [首批关键帧](media/keyframes.png) · [扩展关键帧](media/extended-keyframes.png)
+[在线浏览 116 项表情](https://498600589-byte.github.io/Zeekr-EVA-remix/library.html#library) · [四款精选 GIF](media/nailoong-four.gif) · [静态对照图](media/preview.png) · [首批关键帧](media/keyframes.png) · [扩展关键帧](media/extended-keyframes.png)
 
 ## 奶龙全集更新
 

@@ -3,103 +3,66 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="奶龙的四款 EVA 圆角方屏动效，可单独播放、暂停和下载。">
   <meta name="theme-color" content="#17161c">
-  <title>奶龙上屏 · EVA Remix</title>
+  <meta name="description" content="同屏比较四个 EVA Remix 版本的开心和左右看动效。">
+  <title>EVA Remix · 风格对比</title>
   <link rel="stylesheet" href="preview.css">
-  <script src="preview.js" defer></script>
-  <script src="library-data.js" defer></script>
-  <script src="library.js" defer></script>
+  <link rel="stylesheet" href="hub.css">
+  <script src="hub.js" defer></script>
 </head>
 <body>
   <header class="masthead">
     <div class="wrap masthead-inner">
       <span class="wordmark">EVA REMIX</span>
-      <a href="https://github.com/498600589-byte/Zeekr-EVA-remix/tree/main/docs/nailoong">GitHub 更新记录 <span aria-hidden="true">↗</span></a>
+      <a href="https://github.com/498600589-byte/Zeekr-EVA-remix">GitHub ↗</a>
     </div>
   </header>
   <main class="wrap">
-    <section class="intro" aria-labelledby="title">
-      <div>
-        <h1 id="title">奶龙<span>上屏</span></h1>
-        <p>涵盖 EVA 116 个登记表情的圆角方屏动效</p>
-      </div>
-      <a class="group-button link-button" href="#library">浏览全部表情</a>
+    <section class="hub-intro" aria-labelledby="title">
+      <h1 id="title">EVA 表情风格对比</h1>
+      <p>选一个动作，横向看同一表情在不同版本里的样子。</p>
     </section>
-    <section class="feature-header" aria-labelledby="feature-title">
-      <h2 id="feature-title">四款搞笑精选</h2>
-      <button id="all" class="play" type="button" hidden>播放全部</button>
-    </section>
-    <section class="cards" aria-label="四款奶龙表情">
-      <article class="card" style="--accent:#ffd36d">
-        <div class="screen"><video muted loop playsinline controls preload="metadata" poster="media/laugh.png" aria-label="憋笑失败">
-          <source src="media/laugh.mp4" type="video/mp4">
-        </video></div>
-        <div class="card-details">
-          <div><h2>憋笑失败</h2><p>先把笑憋住，嘴角一松就笑开了。</p></div>
-          <button type="button" class="play" hidden aria-label="播放憋笑失败">播放</button>
-        </div>
-      </article>
-      <article class="card" style="--accent:#bce5b7">
-        <div class="screen"><video muted loop playsinline controls preload="metadata" poster="media/side-eye.png" aria-label="装乖偷瞄">
-          <source src="media/side-eye.mp4" type="video/mp4">
-        </video></div>
-        <div class="card-details">
-          <div><h2>装乖偷瞄</h2><p>挂着乖巧的笑，眼神悄悄溜向一边。</p></div>
-          <button type="button" class="play" hidden aria-label="播放装乖偷瞄">播放</button>
-        </div>
-      </article>
-      <article class="card" style="--accent:#aedaff">
-        <div class="screen"><video muted loop playsinline controls preload="metadata" poster="media/pout.png" aria-label="秒变委屈">
-          <source src="media/pout.mp4" type="video/mp4">
-        </video></div>
-        <div class="card-details">
-          <div><h2>秒变委屈</h2><p>笑脸一瘪，眼泪就冒了出来。</p></div>
-          <button type="button" class="play" hidden aria-label="播放秒变委屈">播放</button>
-        </div>
-      </article>
-      <article class="card" style="--accent:#f4b8da">
-        <div class="screen"><video muted loop playsinline controls preload="metadata" poster="media/surprise.png" aria-label="震惊呆住">
-          <source src="media/surprise.mp4" type="video/mp4">
-        </video></div>
-        <div class="card-details">
-          <div><h2>震惊呆住</h2><p>眼睛一圆，愣一拍才眨眼。</p></div>
-          <button type="button" class="play" hidden aria-label="播放震惊呆住">播放</button>
-        </div>
-      </article>
-    </section>
-    <section id="library" class="library" aria-labelledby="library-title">
-      <div class="library-header">
-        <h2 id="library-title">奶龙表情全集</h2>
-        <p>按用途筛选，或输入 EVA 表情名和编号。选中一项即可在方屏上播放。</p>
-      </div>
-      <div class="library-layout">
-        <div class="library-player">
-          <div class="screen"><canvas id="stage" width="448" height="384" aria-label="奶龙动效"></canvas></div>
-          <div class="player-details">
-            <div><h3 id="active-title">开心</h3><p id="active-meta"></p></div>
-            <button id="toggle-preview" class="play" type="button">暂停</button>
-          </div>
-        </div>
-        <div class="library-browser">
-          <div class="filters">
-            <label>分类 <select id="category"><option value="">全部用途</option></select></label>
-            <label>搜索 <input id="search" type="search" placeholder="表情名、资源名或编号"></label>
-          </div>
-          <p id="count" role="status"></p>
-          <ul id="entries" class="entries" aria-label="表情目录"></ul>
+    <section aria-labelledby="compare-title">
+      <div class="compare-bar">
+        <h2 id="compare-title">同一动作，四个版本</h2>
+        <div class="actions" aria-label="选择对比动作">
+          <button class="play" type="button" data-action="happy" aria-pressed="true">开心</button>
+          <button class="play" type="button" data-action="look" aria-pressed="false">左右看</button>
+          <button class="play" type="button" id="motion">显示静帧</button>
         </div>
       </div>
+      <div class="style-grid">
+        <article class="style-card" data-style="nailoong">
+          <div class="screen"><img src="media/compare/nailoong/happy.png" alt="奶龙的开心表情"></div>
+          <h3>奶龙</h3>
+          <p>116 项网页动效</p>
+          <a href="library.html#library">看全部表情</a>
+        </article>
+        <article class="style-card" data-style="character">
+          <div class="screen"><img src="media/compare/character/happy.png" alt="炫蓝闪电的开心表情"></div>
+          <h3>四角色机甲</h3>
+          <p>炫蓝闪电等四套完整资源</p>
+          <a href="https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.2.0">选角色下载</a>
+        </article>
+        <article class="style-card" data-style="colorway">
+          <div class="screen"><img src="media/compare/colorway/happy.png" alt="五色机甲样例的开心表情"></div>
+          <h3>五色机甲样例</h3>
+          <p>五种配色，六项表情</p>
+          <a href="https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.1.0">查看样例包</a>
+        </article>
+        <article class="style-card" data-style="jojo">
+          <div class="screen"><img src="media/compare/jojo/happy.png" alt="JOJO 动态版的开心表情"></div>
+          <h3>JOJO 动态版</h3>
+          <p>完整漫画动效资源</p>
+          <a href="https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.0.0">下载整套</a>
+        </article>
+      </div>
     </section>
-    <footer class="resources">
-      <p>当前为非官方屏幕预览，EVA 实机播放待验证。</p>
-      <nav aria-label="素材下载">
-        <a href="media/nailoong-four.gif" download>四款动效 GIF</a>
-        <a href="media/preview.png" download>静态预览</a>
-        <a href="media/keyframes.png" download>关键帧图</a>
-        <a href="media/extended-keyframes.png" download>扩展关键帧图</a>
-      </nav>
-    </footer>
+    <nav class="archive" aria-label="历史发布与说明">
+      <a href="https://github.com/498600589-byte/Zeekr-EVA-remix/releases">历史发布</a>
+      <a href="https://github.com/498600589-byte/Zeekr-EVA-remix/blob/main/docs/eva-setup.md">安装与恢复</a>
+      <a href="https://github.com/498600589-byte/Zeekr-EVA-remix/tree/main/docs/nailoong">奶龙更新说明</a>
+    </nav>
   </main>
 </body>
 </html>
