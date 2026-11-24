@@ -27,8 +27,8 @@ output{color:#b3bdd6;white-space:nowrap;font-variant-numeric:tabular-nums}
 </style>
 <main>
  <h1>EVA 表情风格对比</h1>
- <p>选一个机甲配色，再选表情。两边会从同一帧开始播放。</p>
- <nav id="styles" aria-label="机甲配色"></nav>
+ <p>选一个机甲角色或配色，再选表情。两边会从同一帧开始播放。</p>
+ <nav id="styles" aria-label="机甲风格"></nav>
  <nav id="expressions" aria-label="表情"></nav>
  <section class="compare" aria-label="机甲与 JOJO 对比">
   <figure id="mecha"><figcaption></figcaption><div class="screen"><div class="art"></div></div></figure>
@@ -45,7 +45,7 @@ output{color:#b3bdd6;white-space:nowrap;font-variant-numeric:tabular-nums}
 'use strict';
 const data=JSON.parse(document.querySelector('#pack').textContent);
 const element=id=>document.getElementById(id);
-let style='blue-patrol', expression='4', players=[], position=0, lastTime, shown=-1;
+let style=Object.keys(data.styles).find(key=>key!=='jojo'), expression='4', players=[], position=0, lastTime, shown=-1;
 let paused=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const frame=element('frame'), time=element('time'), toggle=element('toggle');
 function seek(force=false){

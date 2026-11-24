@@ -11,9 +11,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--lottie-web', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--catalog', type=Path, default=ROOT / 'styles' / 'catalog.json')
     args = parser.parse_args()
-    styles = ROOT / 'styles'
-    data = json.loads((styles / 'catalog.json').read_bytes())
+    styles = args.catalog.parent
+    data = json.loads(args.catalog.read_bytes())
     for style in data['styles'].values():
         style['animations'] = {
             row['name']: json.loads((styles / style['path'] / f"{row['name']}.json").read_bytes())

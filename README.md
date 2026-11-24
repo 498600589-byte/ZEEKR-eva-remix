@@ -2,11 +2,17 @@
 
 ## Choose an expression style
 
+The four **EVA Character Mecha** packs feature distinct faces and animations for Blue Cop, Mega Trucker, Mega Ambler, and Phoenix Fire. Each package covers the EVA's 116 mapped expressions plus the supplementary resources. The offline comparison features six clips, including Blink, Look, and Comfort.
+
+[Character packs](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.2.0) · [Download the animation comparison](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.2.0/EVA_Cardbot_Comparison.html) · [中文角色与安装指南](styles/cardbot/README.zh-CN.md) · [English character guide](styles/cardbot/README.md)
+
+![Four original character-inspired EVA designs and JoJo shown across six expressions](docs/cardbot-role-preview.png)
+
+## Six-expression colorway kit
+
 The style kit offers five mecha colorways and JoJo Motion v2 for the same six animated expressions. Watch the side-by-side player in the ZIP, then select a style with the Windows installer. The installer backs up the six expressions on your EVA so you can switch styles or restore what you started with.
 
 [Download the Style Kit](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.1.0/EVA_Style_Kit_v2.1.0.zip) · [Style guide](styles/README.md) · [中文风格与安装指南](styles/README.zh-CN.md)
-
-![Five EVA mecha colorways and the JoJo style, shown across six animated expressions](docs/mecha-style-preview.png)
 
 ## JoJo Motion v2 full pack
 

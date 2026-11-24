@@ -1,0 +1,18 @@
+{
+  "resource_version": "0.0.14",
+  "styles": {
+    "blue-cop": {"label": "炫蓝闪电", "color": "#5cf2ff", "path": "blue-cop"},
+    "mega-trucker": {"label": "巨力风暴", "color": "#ffb05a", "path": "mega-trucker"},
+    "mega-ambler": {"label": "急救卫士", "color": "#a1ffe0", "path": "mega-ambler"},
+    "phoenix-fire": {"label": "烈火修罗", "color": "#ffa5a8", "path": "phoenix-fire"},
+    "jojo": {"label": "JOJO 动态版", "color": "#def477", "path": "../jojo/motion-v2"}
+  },
+  "expressions": {
+    "4": {"name": "Blink", "label": "眨眼"},
+    "22": {"name": "Look", "label": "左右看"},
+    "50": {"name": "Happy", "label": "开心"},
+    "102": {"name": "L00000102", "label": "疑问"},
+    "104": {"name": "L00000104", "label": "抱心"},
+    "108": {"name": "L00000108", "label": "搜索"}
+  }
+}
