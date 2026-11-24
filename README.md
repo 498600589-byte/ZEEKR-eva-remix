@@ -1,6 +1,14 @@
-# 奶龙上屏 · EVA 圆角方屏预览
+# 奶龙上屏 · EVA 圆角方屏表情全集
 
-[在线播放四款动效](https://498600589-byte.github.io/Zeekr-EVA-remix/) · [下载四款合成 GIF](media/nailoong-four.gif) · [静态对照图](media/preview.png) · [十二个关键帧](media/keyframes.png)
+[在线浏览 116 项表情](https://498600589-byte.github.io/Zeekr-EVA-remix/#library) · [四款精选 GIF](media/nailoong-four.gif) · [静态对照图](media/preview.png) · [首批关键帧](media/keyframes.png) · [扩展关键帧](media/extended-keyframes.png)
+
+## 奶龙全集更新
+
+新增 116 个 EVA 编号的在线目录与逐项播放器。目录可按日常表情、眼神与手势、迎宾与对话、音乐与玩乐、车内与充电、驾驶提示、节日与问候、创意特效和创意补位筛选，也可按中文名、资源名或编号搜索。
+
+新增睡觉、打哈欠、俏皮单眼眨、害羞、撅嘴、抬眼、低头和说话等关键姿势，配合各场景的表情节奏和提示图案。聆听、音乐、跳舞等连续动作在网页上保留入场、持续、退场的区别。原来缺少可确认素材的八个编号提供原创补位。
+
+## 四款搞笑精选
 
 这次更新把奶龙的头部稍微压宽，保留圆眼、鼓脸颊和柔和的明暗，在模拟的 EVA 圆角方屏四周留出安全区。四款动效可以单独播放、暂停或一起看。
 
@@ -11,12 +19,12 @@
 | 秒变委屈 | 笑脸收下去，瘪嘴冒泪，最后留下一个小撇嘴 | [MP4](media/pout.mp4) · [PNG](media/pout.png) |
 | 震惊呆住 | 眼睛和嘴同时睁圆，停一拍再眨眼恢复 | [MP4](media/surprise.mp4) · [PNG](media/surprise.png) |
 
-本次交付为四款浏览器预览、对应的静态图和关键帧。EVA 实机播放仍待验证。[已有可部署角色与 JOJO 资源](../../README.md#choose-an-expression-style)
+116 项对应网页上的演示。表情方案按场景复用关键姿势，页面含四款独立 MP4、对应静态图及两张关键帧图。EVA 实机资源的适配与播放仍待验证。[已有可部署角色与 JOJO 资源](../../README.md#choose-an-expression-style)
 
 ## English
 
-Four comedic Nailoong face loops are available in an EVA-style rounded-rectangle screen. The face is slightly wider, with room at the corners during motion. Play or pause each loop individually or control all four together.
+The full gallery covers all 116 entries in the EVA expression map. Use the category filter or search by name or ID. Each entry plays on the rounded-rectangle screen with scene-specific timing and cues. Eight mapped entries with unconfirmed original visuals have original preview treatments.
 
-The four clips are **Holding Back a Laugh**, **Innocent Side-Eye**, **Sudden Pout**, and **Awkward Surprise**. This preview includes MP4 loops, stills, a contact sheet, and the animation keyframes. Playback on a physical EVA remains unverified.
+The four original clips are **Holding Back a Laugh**, **Innocent Side-Eye**, **Sudden Pout**, and **Awkward Surprise**. They keep their individual MP4 loops and stills. The larger browser gallery reuses the key poses across appropriate scenarios. Physical EVA compatibility and playback remain unverified.
 
 The fan-made preview uses the official character design as a visual reference. [Nailoong official site](https://www.nailoong.com/)
