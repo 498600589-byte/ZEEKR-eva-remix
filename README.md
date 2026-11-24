@@ -2,9 +2,9 @@
 
 ## Nailoong on EVA
 
-Four comedy loops are now available in a live EVA screen preview. Compare how the grin, side-eye, pout, and surprised blink read inside the rounded face display. Each clip has its own playback control.
+The live Nailoong gallery covers all 116 entries in the EVA expression map. Search by expression name or ID, filter by category, and play the selected motion on a rounded screen. The four original comedy loops remain together at the top.
 
-[Watch the four animations](https://498600589-byte.github.io/Zeekr-EVA-remix/) · [奶龙更新说明与素材](docs/nailoong/README.md) · [Download the combined GIF](docs/nailoong/media/nailoong-four.gif)
+[Open the full gallery](https://498600589-byte.github.io/Zeekr-EVA-remix/#library) · [奶龙更新说明与素材](docs/nailoong/README.md) · [Download the four-clip GIF](docs/nailoong/media/nailoong-four.gif)
 
 ![The four Nailoong expressions inside rounded EVA screen frames](docs/nailoong/media/preview.png)
 
