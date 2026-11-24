@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="奶龙的四款 EVA 圆角方屏动效，可单独播放、暂停和下载。">
+  <meta name="theme-color" content="#17161c">
+  <title>奶龙上屏 · EVA Remix</title>
+  <link rel="stylesheet" href="preview.css">
+  <script src="preview.js" defer></script>
+  <script src="library-data.js" defer></script>
+  <script src="library.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap masthead-inner">
+      <a class="wordmark" href="./">EVA REMIX · 风格对比</a>
+      <a href="https://github.com/498600589-byte/Zeekr-EVA-remix/tree/main/docs/nailoong">GitHub 更新记录 <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="intro" aria-labelledby="title">
+      <div>
+        <h1 id="title">奶龙<span>上屏</span></h1>
+        <p>涵盖 EVA 116 个登记表情的圆角方屏动效</p>
+      </div>
+      <a class="group-button link-button" href="#library">浏览全部表情</a>
+    </section>
+    <section class="feature-header" aria-labelledby="feature-title">
+      <h2 id="feature-title">四款搞笑精选</h2>
+      <button id="all" class="play" type="button" hidden>播放全部</button>
+    </section>
+    <section class="cards" aria-label="四款奶龙表情">
+      <article class="card" style="--accent:#ffd36d">
+        <div class="screen"><video muted loop playsinline controls preload="metadata" poster="media/laugh.png" aria-label="憋笑失败">
+          <source src="media/laugh.mp4" type="video/mp4">
+        </video></div>
+        <div class="card-details">
+          <div><h2>憋笑失败</h2><p>先把笑憋住，嘴角一松就笑开了。</p></div>
+          <button type="button" class="play" hidden aria-label="播放憋笑失败">播放</button>
+        </div>
+      </article>
+      <article class="card" style="--accent:#bce5b7">
+        <div class="screen"><video muted loop playsinline controls preload="metadata" poster="media/side-eye.png" aria-label="装乖偷瞄">
+          <source src="media/side-eye.mp4" type="video/mp4">
+        </video></div>
+        <div class="card-details">
+          <div><h2>装乖偷瞄</h2><p>挂着乖巧的笑，眼神悄悄溜向一边。</p></div>
+          <button type="button" class="play" hidden aria-label="播放装乖偷瞄">播放</button>
+        </div>
+      </article>
+      <article class="card" style="--accent:#aedaff">
+        <div class="screen"><video muted loop playsinline controls preload="metadata" poster="media/pout.png" aria-label="秒变委屈">
+          <source src="media/pout.mp4" type="video/mp4">
+        </video></div>
+        <div class="card-details">
+          <div><h2>秒变委屈</h2><p>笑脸一瘪，眼泪就冒了出来。</p></div>
+          <button type="button" class="play" hidden aria-label="播放秒变委屈">播放</button>
+        </div>
+      </article>
+      <article class="card" style="--accent:#f4b8da">
+        <div class="screen"><video muted loop playsinline controls preload="metadata" poster="media/surprise.png" aria-label="震惊呆住">
+          <source src="media/surprise.mp4" type="video/mp4">
+        </video></div>
+        <div class="card-details">
+          <div><h2>震惊呆住</h2><p>眼睛一圆，愣一拍才眨眼。</p></div>
+          <button type="button" class="play" hidden aria-label="播放震惊呆住">播放</button>
+        </div>
+      </article>
+    </section>
+    <section id="library" class="library" aria-labelledby="library-title">
+      <div class="library-header">
+        <h2 id="library-title">奶龙表情全集</h2>
+        <p>按用途筛选，或输入 EVA 表情名和编号。选中一项即可在方屏上播放。</p>
+      </div>
+      <div class="library-layout">
+        <div class="library-player">
+          <div class="screen"><canvas id="stage" width="448" height="384" aria-label="奶龙动效"></canvas></div>
+          <div class="player-details">
+            <div><h3 id="active-title">开心</h3><p id="active-meta"></p></div>
+            <button id="toggle-preview" class="play" type="button">暂停</button>
+          </div>
+        </div>
+        <div class="library-browser">
+          <div class="filters">
+            <label>分类 <select id="category"><option value="">全部用途</option></select></label>
+            <label>搜索 <input id="search" type="search" placeholder="表情名、资源名或编号"></label>
+          </div>
+          <p id="count" role="status"></p>
+          <ul id="entries" class="entries" aria-label="表情目录"></ul>
+        </div>
+      </div>
+    </section>
+    <footer class="resources">
+      <p>当前为非官方屏幕预览，EVA 实机播放待验证。</p>
+      <nav aria-label="素材下载">
+        <a href="media/nailoong-four.gif" download>四款动效 GIF</a>
+        <a href="media/preview.png" download>静态预览</a>
+        <a href="media/keyframes.png" download>关键帧图</a>
+        <a href="media/extended-keyframes.png" download>扩展关键帧图</a>
+      </nav>
+    </footer>
+  </main>
+</body>
+</html>
