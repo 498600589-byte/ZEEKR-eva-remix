@@ -18,6 +18,24 @@
 .style-card p { margin: 0 4px 9px; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .style-card a { display: inline-flex; padding: 4px; margin: 0 0 2px; font-size: 14px; color: #ffd77f; }
 .archive { display: flex; flex-wrap: wrap; gap: 10px 19px; padding-block: 13px 29px; color: var(--muted); font-size: 14px; }
+
+.boot-update {
+  display: grid;
+  grid-template-columns: minmax(126px, 192px) minmax(0, 1fr);
+  gap: clamp(12px, 3vw, 24px);
+  align-items: center;
+  margin-top: 13px;
+  padding: 10px;
+  background: #211e27;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+}
+.boot-screen { border-radius: 10px; overflow: hidden; background: #000; }
+.boot-screen img { display: block; width: 100%; height: auto; }
+.boot-copy h2 { margin: 0; font-size: clamp(17px, 3vw, 25px); }
+.boot-copy p { margin: 6px 0; color: var(--muted); font-size: 14px; }
+.boot-copy a { display: inline-block; margin: 4px 12px 4px 0; color: #ffd77f; font-size: 14px; }
+
 @media (max-width: 780px) {
   .style-grid { grid-auto-flow: column; grid-auto-columns: minmax(153px,41%); grid-template-columns: none;
     overflow: auto; scroll-snap-type: x proximity; scroll-padding-left: 1px; }
