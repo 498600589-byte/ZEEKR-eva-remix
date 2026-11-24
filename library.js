@@ -3,7 +3,11 @@
 (() => {
   const {categories, entries} = window.evaNailoongCatalog;
   const canvas = document.querySelector('#stage');
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', {alpha:false});
+  const outgoing = document.createElement('canvas');
+  outgoing.width = canvas.width;
+  outgoing.height = canvas.height;
+  const outgoingCtx = outgoing.getContext('2d', {alpha:false});
   const list = document.querySelector('#entries');
   const input = document.querySelector('#search');
   const select = document.querySelector('#category');
@@ -17,6 +21,7 @@
   let elapsed = 0;
   let lastFrame = null;
   let pending = null;
+  let switching = false;
 
   const atlasNames = [
     ['stifle','neutral','nervous','calm','laugh','left','cry','shock','smirk','recover','pout','closed'],
@@ -25,6 +30,11 @@
   const atlasByName = new Map();
   const sources = ['media/keyframes.png', 'media/extended-keyframes.png'];
   const scriptBase = document.currentScript.src;
+  const transitions = window.evaNailoongTransitions;
+  const transitionAtlas = new Image();
+  transitionAtlas.src = new URL('media/face-transitions.webp', scriptBase);
+  let transitionsReady = false;
+  transitionAtlas.decode().then(() => { transitionsReady = true; }).catch(() => {});
   const loaded = sources.map((src, index) => {
     const image = new Image();
     image.src = new URL(src, scriptBase);
@@ -78,6 +88,7 @@
   };
   const positions = [0,.20,.40,.68,1];
   const clamp = value => Math.min(1,Math.max(0,value));
+  const ease = value => value*value*(3-2*value);
 
   function rounded(x,y,width,height,radius,color) {
     ctx.fillStyle=color;
@@ -94,14 +105,38 @@
     ctx.fillText(text,x,y);
   }
 
-  function paintFace(name,alpha,x,y,scale,turn) {
-    const atlas = atlasByName.get(name);
+  function poseAt(first,last,step,width,height) {
+    if (step===0 || step===transitions.steps) {
+      const atlas=atlasByName.get(step===0?first:last);
+      ctx.drawImage(atlas.image,atlas.x,atlas.y,358,282,-width/2,-height/2,width,height);
+      return;
+    }
+    const swapped=first>last;
+    const key=swapped?last+'/'+first:first+'/'+last;
+    const index=transitions.pairs[key]+(swapped?transitions.steps-step:step)-1;
+    const {width:tileWidth,height:tileHeight,columns}=transitions;
+    ctx.drawImage(transitionAtlas,index%columns*tileWidth,Math.floor(index/columns)*tileHeight,
+      tileWidth,tileHeight,-width/2,-height/2,width,height);
+  }
+
+  function paintFace(first,last,blend,x,y,scale,turn) {
+    const {steps}=transitions;
+    const width=338*scale, height=262*scale;
     ctx.save();
-    ctx.globalAlpha=alpha;
     ctx.translate(x,y);
     ctx.rotate(turn);
-    const width=338*scale, height=262*scale;
-    ctx.drawImage(atlas.image,atlas.x,atlas.y,358,282,-width/2,-height/2,width,height);
+    if (first===last || blend===0) poseAt(first,last,0,width,height);
+    else if (blend===1) poseAt(first,last,steps,width,height);
+    else if (transitionsReady) {
+      const step=blend*steps, previous=Math.floor(step);
+      poseAt(first,last,previous,width,height);
+      ctx.globalAlpha=step-previous;
+      poseAt(first,last,previous+1,width,height);
+    } else {
+      poseAt(first,last,0,width,height);
+      ctx.globalAlpha=blend;
+      poseAt(first,last,steps,width,height);
+    }
     ctx.restore();
   }
 
@@ -174,7 +209,7 @@
     const index=positions.findIndex((step,i)=>i>0 && p<step)-1;
     const current=Math.max(0,index);
     const raw=(p-positions[current])/(positions[current+1]-positions[current]);
-    const blend=clamp((raw-(current===0?.54:.64))*3.4);
+    const blend=ease(clamp((raw-.27)/.71));
     const amplitude=selected.pose==='dance'?11:selected.pose==='sleep'?2:4;
     const beat=Math.sin(p*Math.PI*(selected.phase==='loop'?8:4));
     const side=['listenRight','talkRight','greetRight'].includes(selected.pose)?1:-1;
@@ -184,14 +219,20 @@
     ctx.fillRect(0,0,448,384);
     const x=224+beat*amplitude*side, y=(cue?155:183)-beat*amplitude;
     const tilt=beat*(selected.pose==='dance'?.085:.025);
-    paintFace(poses[current],1,x,y,scale,tilt);
-    if (blend>0 && poses[current]!==poses[current+1]) paintFace(poses[current+1],blend,x,y,scale,tilt);
+    paintFace(poses[current],poses[current+1],blend,x,y,scale,tilt);
     drawCue(selected,p,moods[selected.category]);
+    if (switching) {
+      const fade=1-ease(clamp(time/.18));
+      ctx.globalAlpha=fade;
+      ctx.drawImage(outgoing,0,0);
+      ctx.globalAlpha=1;
+      if (fade<=0) switching=false;
+    }
   }
 
   function tick(now) {
     pending=null;
-    if (lastFrame!==null) elapsed+=Math.min(now-lastFrame,80)/1000;
+    if (lastFrame!==null) elapsed+=(now-lastFrame)/1000;
     lastFrame=now;
     draw(elapsed);
     schedule();
@@ -210,13 +251,17 @@
   }
 
   function setChoice(row) {
+    const previous=list.querySelector('[aria-pressed="true"]');
+    switching=ready && visible && playing && row!==selected;
+    if (switching) outgoingCtx.drawImage(canvas,0,0);
     selected=row;
     elapsed=0;
     lastFrame=null;
     document.querySelector('#active-title').textContent=row.label;
     document.querySelector('#active-meta').textContent='编号 '+row.id+' · '+categories[row.category];
     canvas.setAttribute('aria-label',row.label+'，奶龙圆角方屏动效');
-    for (const button of list.querySelectorAll('button')) button.setAttribute('aria-pressed',Number(button.dataset.id)===row.id);
+    if (previous) previous.setAttribute('aria-pressed','false');
+    list.querySelector('[data-id="'+row.id+'"]')?.setAttribute('aria-pressed','true');
     draw(0);
   }
 
