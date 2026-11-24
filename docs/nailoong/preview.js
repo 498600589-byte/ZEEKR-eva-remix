@@ -1,10 +1,13 @@
 'use strict';
 
 const all = document.querySelector('#all');
+const autoPlay = !matchMedia('(prefers-reduced-motion: reduce)').matches;
 const players = [...document.querySelectorAll('.card')].map(card => ({
   video: card.querySelector('video'),
   button: card.querySelector('.play'),
   name: card.querySelector('h2').textContent,
+  wanted: autoPlay,
+  visible: false,
 }));
 
 function refresh() {
@@ -13,7 +16,7 @@ function refresh() {
     button.textContent = action;
     button.setAttribute('aria-label', action + name);
   }
-  all.textContent = players.every(({video}) => video.paused) ? '播放全部' : '暂停全部';
+  all.textContent = players.some(({wanted}) => wanted) ? '暂停全部' : '播放全部';
 }
 
 async function play(video) {
@@ -24,12 +27,27 @@ async function play(video) {
   }
 }
 
-for (const {video, button} of players) {
+const observer = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    const player = players.find(({video}) => video === entry.target);
+    player.visible = entry.isIntersecting;
+    sync(player);
+  }
+});
+
+function sync({video, visible, wanted}) {
+  if (wanted && visible && !document.hidden) play(video);
+  else video.pause();
+}
+
+for (const player of players) {
+  const {video,button}=player;
   video.controls = false;
   button.hidden = false;
   button.addEventListener('click', () => {
-    if (video.paused) play(video);
-    else video.pause();
+    player.wanted=video.paused;
+    sync(player);
+    refresh();
   });
   video.addEventListener('play', refresh);
   video.addEventListener('pause', refresh);
@@ -38,17 +56,18 @@ for (const {video, button} of players) {
     button.disabled = true;
     video.controls = true;
   });
+  observer.observe(video);
 }
 
 all.hidden = false;
 all.addEventListener('click', () => {
-  if (players.every(({video}) => video.paused)) {
-    for (const {video} of players) play(video);
-  } else {
-    for (const {video} of players) video.pause();
+  const wanted=!players.some(player=>player.wanted);
+  for (const player of players) {
+    player.wanted=wanted;
+    sync(player);
   }
+  refresh();
 });
 
-if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  for (const {video} of players) play(video);
-}
+document.addEventListener('visibilitychange',()=>players.forEach(sync));
+refresh();
