@@ -1,5 +1,13 @@
 # Zeekr EVA Remix
 
+## Nailoong on EVA
+
+Four comedy loops are now available in a live EVA screen preview. Compare how the grin, side-eye, pout, and surprised blink read inside the rounded face display. Each clip has its own playback control.
+
+[Watch the four animations](https://498600589-byte.github.io/Zeekr-EVA-remix/) · [奶龙更新说明与素材](docs/nailoong/README.md) · [Download the combined GIF](docs/nailoong/media/nailoong-four.gif)
+
+![The four Nailoong expressions inside rounded EVA screen frames](docs/nailoong/media/preview.png)
+
 ## Choose an expression style
 
 The four **EVA Character Mecha** packs feature distinct faces and animations for Blue Cop, Mega Trucker, Mega Ambler, and Phoenix Fire. Each package covers the EVA's 116 mapped expressions plus the supplementary resources. The offline comparison features six clips, including Blink, Look, and Comfort.

@@ -2,4 +2,5 @@
 examples/** -text
 styles/**/*.json -text
 *.png binary
+*.mp4 binary
 *.gif binary
