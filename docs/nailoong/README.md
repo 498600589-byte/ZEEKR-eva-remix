@@ -2,6 +2,16 @@
 
 [在线浏览 116 项表情](https://498600589-byte.github.io/Zeekr-EVA-remix/library.html#library) · [四款精选 GIF](media/nailoong-four.gif) · [静态对照图](media/preview.png) · [首批关键帧](media/keyframes.png) · [扩展关键帧](media/extended-keyframes.png)
 
+## 奶龙开机与待绑定
+
+机甲和奶龙是给车里亲子时光准备的。等人、休息时，爸妈可以和孩子一起学 EVA 做表情，猜它接下来会偷瞄、憋笑，还是被自己转晕。
+
+上电时，奶龙的螺旋眼慢慢转动。等待绑定时，画面停在同一张眩晕脸。下方全程显示「请在极+/极物完成绑定」。
+
+<img src="media/boot/startup.gif" alt="奶龙开机动图" width="240"> <img src="media/boot/binding.png" alt="奶龙待绑定画面" width="240">
+
+开机和待绑定两张画面已适配并写入一台资源版本为 `0.0.14` 的 EVA。另有 75 项奶龙表情已转换并通过该设备的写入回读校验，涵盖四款精选、眨眼、打哈欠等。下方的 116 项是完整网页预览目录。
+
 ## 奶龙全集更新
 
 四款精选更新为 30 帧/秒 MP4，GitHub 首页的奶龙对比动图更新为 25 帧/秒。全集给表情关键姿势加了过渡帧，切换编号时衔接上一画面。横向对比会等新动图解码后再换画面。
@@ -21,12 +31,14 @@
 | 秒变委屈 | 笑脸收下去，瘪嘴冒泪，最后留下一个小撇嘴 | [MP4](media/pout.mp4) · [PNG](media/pout.png) |
 | 震惊呆住 | 眼睛和嘴同时睁圆，停一拍再眨眼恢复 | [MP4](media/surprise.mp4) · [PNG](media/surprise.png) |
 
-116 项对应网页上的演示。表情方案按场景复用关键姿势，页面含四款独立 MP4、对应静态图及两张关键帧图。EVA 实机资源的适配与播放仍待验证。[已有可部署角色与 JOJO 资源](../../README.md#choose-an-expression-style)
+116 项对应网页上的演示。表情方案按场景复用关键姿势，页面含四款独立 MP4、对应静态图及两张关键帧图。[已有可部署角色与 JOJO 资源](https://github.com/498600589-byte/Zeekr-EVA-remix#choose-an-expression-style)
 
 ## English
 
+The mecha and Nailoong styles give parents and kids a few more ways to play with EVA while waiting or taking a break in the car. Try copying its faces or guessing which expression comes next.
+
 The full gallery covers all 116 entries in the EVA expression map. Use the category filter or search by name or ID. Each entry plays on the rounded-rectangle screen with scene-specific timing and cues. Eight mapped entries with unconfirmed original visuals have original preview treatments.
 
-The four original clips are **Holding Back a Laugh**, **Innocent Side-Eye**, **Sudden Pout**, and **Awkward Surprise**. They keep their individual MP4 loops and stills. The larger browser gallery reuses the key poses across appropriate scenarios. Physical EVA compatibility and playback remain unverified.
+The four original clips are **Holding Back a Laugh**, **Innocent Side-Eye**, **Sudden Pout**, and **Awkward Surprise**. They keep their individual MP4 loops and stills. The larger browser gallery reuses the key poses across appropriate scenarios. The dizzy-eyed startup and pairing screens were installed on an EVA running resource version 0.0.14. Seventy-five other Nailoong expressions were converted and checked after writing to that device.
 
 The fan-made preview uses the official character design as a visual reference. [Nailoong official site](https://www.nailoong.com/)

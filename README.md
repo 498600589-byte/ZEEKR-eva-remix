@@ -1,6 +1,8 @@
 # Zeekr EVA Remix
 
-[在线横向对比 / Compare styles](https://498600589-byte.github.io/Zeekr-EVA-remix/) · [奶龙 116 项预览](https://498600589-byte.github.io/Zeekr-EVA-remix/library.html#library) · [Windows 安装与恢复 / Setup](docs/eva-setup.md)
+[在线横向对比 / Compare styles](https://498600589-byte.github.io/Zeekr-EVA-remix/) · [奶龙开机动画](https://498600589-byte.github.io/Zeekr-EVA-remix/#nailoong-startup) · [奶龙 116 项预览](https://498600589-byte.github.io/Zeekr-EVA-remix/library.html#library) · [Windows 安装与恢复 / Setup](docs/eva-setup.md)
+
+机甲和奶龙是给车里亲子时光准备的。等人、休息时，爸妈可以和孩子一起学 EVA 做表情，猜它接下来会偷瞄、憋笑，还是被自己转晕。
 
 | 风格 | 奶龙 | 四角色机甲 | 五色机甲样例 | JOJO 动态版 |
 | --- | --- | --- | --- | --- |
@@ -10,7 +12,15 @@
 
 [早期 JOJO 静态案例](docs/jojo-case.png) · [原始 Lottie 样例](examples/jojo/) · [所有历史发布](https://github.com/498600589-byte/Zeekr-EVA-remix/releases)
 
-可安装资源基于 EVA 资源版本 `0.0.14`。奶龙目前为浏览器预览，实机播放待验证。
+实机资源基于 EVA 资源版本 `0.0.14`。奶龙另有 116 项网页预览。
+
+## 奶龙开机与待绑定
+
+开机时双眼旋转，待绑定时停在同一张眩晕脸。下方全程显示「请在极+/极物完成绑定」。
+
+<img src="docs/nailoong/media/boot/startup.gif" alt="奶龙开机动图" width="220"> <img src="docs/nailoong/media/boot/binding.png" alt="奶龙待绑定画面" width="220">
+
+[开机与待绑定更新说明](docs/nailoong/README.md#奶龙开机与待绑定)
 
 <a id="choose-an-expression-style"></a>
 <a id="2-open-the-eva-resource-drive"></a>
