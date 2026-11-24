@@ -1,0 +1,19 @@
+{
+  "resource_version": "0.0.14",
+  "styles": {
+    "blue-patrol": {"label": "蓝色巡逻", "color": "#5cf2ff", "path": "mecha/blue-patrol"},
+    "amber-duty": {"label": "橙色工程", "color": "#ffe1a0", "path": "mecha/amber-duty"},
+    "green-rescue": {"label": "绿色救援", "color": "#a1ffe0", "path": "mecha/green-rescue"},
+    "red-boost": {"label": "红色能量", "color": "#ffc5ae", "path": "mecha/red-boost"},
+    "violet-scout": {"label": "紫色侦察", "color": "#e4d5ff", "path": "mecha/violet-scout"},
+    "jojo": {"label": "JOJO 动态版", "color": "#def477", "path": "jojo/motion-v2"}
+  },
+  "expressions": {
+    "4": {"name": "Blink", "label": "眨眼"},
+    "22": {"name": "Look", "label": "左右看"},
+    "50": {"name": "Happy", "label": "开心"},
+    "102": {"name": "L00000102", "label": "疑问"},
+    "104": {"name": "L00000104", "label": "抱心"},
+    "108": {"name": "L00000108", "label": "搜索"}
+  }
+}

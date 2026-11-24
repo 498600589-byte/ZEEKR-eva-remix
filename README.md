@@ -1,5 +1,15 @@
 # Zeekr EVA Remix
 
+## Choose an expression style
+
+The style kit offers five mecha colorways and JoJo Motion v2 for the same six animated expressions. Watch the side-by-side player in the ZIP, then select a style with the Windows installer. The installer backs up the six expressions on your EVA so you can switch styles or restore what you started with.
+
+[Download the Style Kit](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.1.0/EVA_Style_Kit_v2.1.0.zip) · [Style guide](styles/README.md) · [中文风格与安装指南](styles/README.zh-CN.md)
+
+![Five EVA mecha colorways and the JoJo style, shown across six animated expressions](docs/mecha-style-preview.png)
+
+## JoJo Motion v2 full pack
+
 JoJo Motion v2 upgrades the screen expressions for the Zeekr EVA ICR10Z1A with resource version `0.0.14`. The new animations use anticipation, punch-in poses, sweeping speed lines, and expressive changes in timing. The pack updates 128 animations across 57 Lottie and 71 packed JPEG assets.
 
 [Download JoJo Motion v2](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.0.0/EVA_JOJO_Motion_v2.0.0.zip) · [Release notes](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.0.0) · [中文安装说明](docs/jojo-motion-v2.zh-CN.md)

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EVA 表情风格对比</title>
+<style>
+*{box-sizing:border-box}
+:root{color-scheme:dark;background:#111321;color:#f1f3ff;font:16px system-ui,"Microsoft YaHei",sans-serif}
+body{margin:0}
+main{max-width:1120px;margin:auto;padding:clamp(20px,5vw,64px)}
+h1{font-size:clamp(30px,5vw,52px);line-height:1.03;margin:8px 0 16px;letter-spacing:-.04em}
+p{color:#b3bdd6;margin:0 0 24px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+button{font:inherit;color:inherit;border:1px solid #47516d;border-radius:8px;padding:8px 14px;background:#20273d;cursor:pointer}
+button:hover,button:focus-visible{border-color:#a5c8ff}
+button[aria-pressed=true]{background:#b2ddff;color:#111321;border-color:#b2ddff}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+figure{margin:0;border:1px solid #3b4561;border-radius:12px;overflow:hidden;background:#171d30}
+figcaption{padding:11px 15px;font-weight:600;color:var(--accent,#def477)}
+.screen{position:relative;width:100%;aspect-ratio:15/13;background:#000;overflow:hidden}
+.art{position:absolute;left:50%;top:50%;width:86.67%;height:115.39%;transform:translate(-50%,-50%) rotate(-90deg)}
+.controls{display:flex;align-items:center;gap:12px;margin-top:17px}
+input{flex:1;min-width:60px;accent-color:#9dcaff}
+output{color:#b3bdd6;white-space:nowrap;font-variant-numeric:tabular-nums}
+.hint{display:block;margin-top:20px}
+@media(max-width:480px){main{padding:16px}button{font-size:14px;padding:7px 9px}.compare{gap:6px}figcaption{padding:8px}}
+</style>
+<main>
+ <h1>EVA 表情风格对比</h1>
+ <p>选一个机甲配色，再选表情。两边会从同一帧开始播放。</p>
+ <nav id="styles" aria-label="机甲配色"></nav>
+ <nav id="expressions" aria-label="表情"></nav>
+ <section class="compare" aria-label="机甲与 JOJO 对比">
+  <figure id="mecha"><figcaption></figcaption><div class="screen"><div class="art"></div></div></figure>
+  <figure id="jojo"><figcaption>JOJO 动态版</figcaption><div class="screen"><div class="art"></div></div></figure>
+ </section>
+ <section class="controls" aria-label="播放控制">
+  <button id="toggle" type="button">暂停</button>
+  <label for="frame">进度</label><input id="frame" type="range" min="0" value="0"><output id="time"></output>
+ </section>
+</main>
+<script>@@LOTTIE@@</script>
+<script type="application/json" id="pack">@@DATA@@</script>
+<script>
+'use strict';
+const data=JSON.parse(document.querySelector('#pack').textContent);
+const element=id=>document.getElementById(id);
+let style='blue-patrol', expression='4', players=[], position=0, lastTime, shown=-1;
+let paused=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const frame=element('frame'), time=element('time'), toggle=element('toggle');
+function seek(force=false){
+ const next=Math.floor(position);
+ if(next===shown&&!force)return;
+ shown=next;
+ for(const player of players)player.goToAndStop(next,true);
+ frame.value=next;
+ time.value=(next+1)+' / '+(Number(frame.max)+1);
+}
+function buttons(node,values,current,select){
+ node.replaceChildren(...Object.entries(values).map(([key,item])=>{
+  const button=document.createElement('button');
+  button.type='button';button.textContent=item.label;button.dataset.key=key;
+  button.setAttribute('aria-pressed',key===current);
+  button.onclick=()=>{select(key);render();};
+  return button;
+ }));
+}
+function render(){
+ buttons(element('styles'),Object.fromEntries(Object.entries(data.styles).filter(([key])=>key!=='jojo')),style,key=>style=key);
+ buttons(element('expressions'),data.expressions,expression,key=>expression=key);
+ for(const player of players)player.destroy();
+ const name=data.expressions[expression].name;
+ players=[['mecha',style],['jojo','jojo']].map(([panel,key])=>{
+  const spec=data.styles[key];
+  const figure=element(panel), doc=spec.animations[name];
+  figure.style.setProperty('--accent',spec.color);
+  figure.querySelector('figcaption').textContent=spec.label;
+  const player=lottie.loadAnimation({container:figure.querySelector('.art'),renderer:'svg',animationData:JSON.parse(JSON.stringify(doc)),loop:false,autoplay:false});
+  player.addEventListener('DOMLoaded',()=>seek(true));
+  return player;
+ });
+ frame.max=data.styles[style].animations[name].op-1;
+ position=0;lastTime=undefined;seek(true);
+}
+function setPaused(value){paused=value;lastTime=undefined;toggle.textContent=paused?'播放':'暂停';}
+toggle.onclick=()=>setPaused(!paused);
+frame.oninput=()=>{setPaused(true);position=Number(frame.value);seek(true);};
+function tick(now){
+ if(!paused&&lastTime!==undefined){position=(position+Math.min(now-lastTime,120)*.025)%(Number(frame.max)+1);seek();}
+ lastTime=paused?undefined:now;
+ requestAnimationFrame(tick);
+}
+setPaused(paused);render();requestAnimationFrame(tick);
+</script>
+</html>
