@@ -257,9 +257,9 @@ def _cue(canvas,action,power,t):
     canvas.paste(layer,(0,0),alpha)
 
 
-def frame(model,action,phase):
+def frame(model,action,phase, *, scene=None):
     """Return one 448x384 upright RGB image. phase 0 and 1 share a rest pose."""
-    if action not in ACTIONS:
+    if scene is None and action not in ACTIONS:
         raise ValueError(f"Unsupported action: {action}")
     role=model.role
     n=ROLES.index(role)
@@ -268,8 +268,11 @@ def frame(model,action,phase):
     tempo=(1,.87,.96,1.12)[n]
     t=t+(tempo-1)*sin(t*tau)/tau
     shape=_hold(t,.06,.33,.59,.94)
-    gaze=rise=asym=tilt=mouth=blink=reach=nod=0.
-    if action=="blink":
+    gaze=rise=asym=tilt=mouth=blink=reach=nod=vertical=wink=0.
+    laughing=action=="happy"
+    if scene is not None:
+        gaze,vertical,rise,asym,tilt,mouth,blink,nod,wink,laughing = scene(action,t)
+    elif action=="blink":
         blink=_hold(t,.21,.30,.325,.46)
         if role in ("blue","fire"):
             blink+=.89*_hold(t,.52,.57,.59,.69)
@@ -309,7 +312,7 @@ def frame(model,action,phase):
         mouth=-.3*shape
     canvas=model.base.copy()
     for side,eye in enumerate(model.eyes):
-        _draw_eye(canvas,eye,blink,gaze,(-5 if action=="question" else 0)*shape,action=="happy")
+        _draw_eye(canvas,eye,min(1,blink+(wink if side==0 else 0)),gaze,vertical+(-5 if action=="question" else 0)*shape,laughing)
     for side,cheek in enumerate(model.cheeks):
         sign=1 if side==0 else -1
         x,y=cheek.center
