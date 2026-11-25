@@ -11,6 +11,15 @@
   const actions = [...document.querySelectorAll('[data-action]')];
   const switchMotion = document.querySelector('#motion');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const kittenLoop = document.querySelector('.kitten-loop');
+  function syncKitten() {
+    if (!kittenLoop) return;
+    if (reduce.matches || document.hidden) kittenLoop.pause();
+    else kittenLoop.play().catch(() => {});
+  }
+  syncKitten();
+  reduce.addEventListener('change',syncKitten);
+  document.addEventListener('visibilitychange',syncKitten);
   let move = 'happy';
   let animated = !reduce.matches;
   let revision = 0;

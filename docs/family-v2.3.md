@@ -1,8 +1,8 @@
 # EVA 亲子表情 v2.3
 
-[炫蓝闪电](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-mecha-blue-v2.3.0.zip) · [巨力风暴](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-mecha-orange-v2.3.0.zip) · [急救卫士](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-mecha-medic-v2.3.0.zip) · [烈火修罗](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-mecha-fire-v2.3.0.zip) · [奶龙](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-nailoong-v2.3.0.zip) · [小猫咪](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-kitten-v2.3.0.zip)
+[炫蓝闪电](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-mecha-blue-v2.3.0.zip) · [巨力风暴](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-mecha-orange-v2.3.0.zip) · [急救卫士](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-mecha-medic-v2.3.0.zip) · [烈火修罗](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-mecha-fire-v2.3.0.zip) · [奶龙](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-nailoong-v2.3.0.zip) · [小猫咪](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.1/eva-kitten-v2.3.1.zip)
 
-四款可爱机甲各替换六个表情槽位，分别为眨眼、左右看、开心、疑问、抱心和搜索。奶龙包包含 75 项表情和两张专用界面。网页可查看全部 116 项奶龙场景。小猫咪包使用下列八个已有动作槽位，实机由对应事件触发。
+四款可爱机甲各替换六个表情槽位，分别为眨眼、左右看、开心、疑问、抱心和搜索。奶龙包包含 75 项表情和两张专用界面。网页可查看全部 116 项奶龙场景。猫咪 v2.3.1 使用纯色大眼睛，八段网页视频均为 60 帧/秒。实机 DAT 采用各槽位原始帧数，播放速度由设备控制。小猫咪包使用下列八个已有动作槽位，实机由对应事件触发。
 
 | 小猫咪动作 | EVA 资源名 |
 | --- | --- |

@@ -29,9 +29,6 @@ export function drawCat(ctx,move,t) {
   function part(x,y,angle,fn){
     C.save();C.translate(x,y);C.rotate(angle);fn();C.restore();
   }
-  function gradient(x,y,x2,y2,a,b){
-    const g=C.createLinearGradient(x,y,x2,y2);g.addColorStop(0,a);g.addColorStop(1,b);return g;
-  }
   const noseTilt=move==='nuzzle'?-.20*active:move==='wash'?.12*rub*active:move==='knead'?.10*active*sin(TAU*t*2):move==='shy'?.14*active:move==='ball'?.06*swing:0;
   let dx=0,dy=0,gx=0,gy=0,close=.98*hold(t,.81,.864,.887,.954);
   if(move==='fish'){gy=14*active;dy=4*chew+4*hold(t,.06,.15,.19,.28);close=Math.max(close,.62*chew)}
@@ -47,21 +44,20 @@ export function drawCat(ctx,move,t) {
   const zoom=1+active*({kiss:.07,nuzzle:.09,knead:.045}[move]||0);C.scale(zoom,zoom);
   for(const side of [-1,1]){
     const shut=move==='wash'?Math.max(close,active*ease(.55+side*.67*rub)):close;
-    part(76*side,-18,side*.018,()=>{
+    part(82*side,-35,side*.018,()=>{
+      C.scale(1.48,1.48);
       const eye="M-48 -8 C-49 -30 -34 -47 -9 -48 C17 -50 39 -39 44 -17 C50 7 40 32 23 42 C7 52 -22 47 -35 34 C-45 24 -48 7 -48 -8Z";
       if(shut<.983){
         C.save();C.globalAlpha=1-ease((shut-.68)/.30);
         C.scale(1,1-.93*shut);
-        path(eye,gradient(0,-48,0,47,'#fff4c7','#ffcc82'));
+        path(eye,'#9ce3d2');
         C.save();C.clip(new Path2D(eye));
-        oval(gx,gy,28.5,40,gradient(-8,-33,8,35,'#81d8c0','#408678'));
-        oval(gx+.4,gy,12.8,31.5,'#172b32');
-        oval(gx-7,gy-17,7.6,8.4,'#fffcdf');oval(gx+9,gy+14,3.1,3.3,'#d3f6d7');
+        oval(gx,gy,15,29,'#15292e');
         C.restore();C.restore();
       }
-      if(shut>.45){C.save();C.globalAlpha=ease((shut-.45)/.43);path("M-36 6 Q-2 -20 35 4",null,"#ffe6ad",8);C.restore()}
+      if(shut>.45){C.save();C.globalAlpha=ease((shut-.45)/.43);path("M-36 6 Q-2 -20 35 4",null,"#9ce3d2",8);C.restore()}
     });
-    part(118*side,35,side*(.035*breathe+(move==='wash'?.11*rub*active:move==='fish'?.05*chew:0)),()=>{
+    part(124*side,49,side*(.035*breathe+(move==='wash'?.11*rub*active:move==='fish'?.05*chew:0)),()=>{
       C.scale(side,1);
       path("M-3 -10 Q16 -20 42 -24 M2 3 Q27 1 53 2 M0 14 Q23 19 41 28",null,"#ffdda6",5.3);
     });
@@ -70,7 +66,7 @@ export function drawCat(ctx,move,t) {
   if(open>.08){oval(0,56,12,3+open*11,'#efa097');oval(0,55,7,2+open*5,'#653c46')}
   if(move==='kiss'&&active>.5){oval(0,55,7.5,5,'#f6b9a6')}
   else {path("M0 40 L0 46 Q-9 65 -25 52 M0 46 Q10 65 25 52",null,"#ffe5ba",4.8)}
-  path("M-13 29 C-13 22 -6 21 0 23 C8 20 15 23 13 30 Q9 36 1 40 Q-8 36 -13 29Z",gradient(0,22,2,40,'#ffc5b2','#f08e8b'));
+  path("M-13 29 C-13 22 -6 21 0 23 C8 20 15 23 13 30 Q9 36 1 40 Q-8 36 -13 29Z",'#f6a6a1');
   C.restore();
   // Props enter and leave with their action; a resting frame contains just the features.
   if(active<.002)return;
@@ -85,7 +81,7 @@ export function drawCat(ctx,move,t) {
     });
   }else if(move==='ball'){
     part(224+127*swing,293-31*Math.abs(sin(TAU*t*2)),t*TAU*2,()=>{
-      oval(0,0,30,30,"#92dbc9");path("M-27 -10 Q-4 -23 26 14 M-19 23 Q0 3 25 -8",null,"#398e8c",5);oval(-9,-11,5,3,"#dff8ce")
+      oval(0,0,30,30,"#92dbc9");path("M-27 -10 Q-4 -23 26 14 M-19 23 Q0 3 25 -8",null,"#398e8c",5)
     });
   }else if(move==='wash'){
     for(let k=0;k<2;k++){
