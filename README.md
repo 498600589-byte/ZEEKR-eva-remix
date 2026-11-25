@@ -4,6 +4,17 @@
 
 机甲和奶龙是给车里亲子时光准备的。等人、休息时，爸妈可以和孩子一起学 EVA 做表情，猜它接下来会偷瞄、憋笑，还是被自己转晕。
 
+### 亲子表情 v2.3
+
+| 可爱机甲 | 奶龙 | 小猫咪 |
+| --- | --- | --- |
+| <img src="docs/nailoong/cute-mecha/question.gif" width="185" alt="炫蓝闪电歪头提问"> | <img src="docs/nailoong/media/nailoong-heart.png" width="185" alt="奶龙的爱心提示"> | <img src="docs/nailoong/kitten/fish.gif" width="185" alt="小猫咪吃鱼"> |
+| [四角色，各六个动作](https://498600589-byte.github.io/Zeekr-EVA-remix/cute-mecha/) | [大符号动效](https://498600589-byte.github.io/Zeekr-EVA-remix/library.html?expression=104#library) | [吃鱼、玩球、洗脸等八个动作](https://498600589-byte.github.io/Zeekr-EVA-remix/kitten/) |
+
+[下载六个可单独安装和恢复的资源包](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.3.0) · [安装与动作对应说明](docs/family-v2.3.md)
+
+### 历史风格对比
+
 | 风格 | 奶龙 | 四角色机甲 | 五色机甲样例 | JOJO 动态版 |
 | --- | --- | --- | --- | --- |
 | 开心动效 | ![奶龙笑出声](docs/nailoong/media/compare/nailoong/happy.gif) | ![炫蓝闪电笑](docs/nailoong/media/compare/character/happy.gif) | ![蓝色巡逻笑](docs/nailoong/media/compare/colorway/happy.gif) | ![JOJO 大笑](docs/nailoong/media/compare/jojo/happy.gif) |

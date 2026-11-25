@@ -183,16 +183,16 @@
     } else if (kind==='orangeBeads' || kind==='goldBeads') {
       for(let i=0;i<6;i++) {
         const angle=(p*(row.phase==='loop'?2:1))*Math.PI*2+i*.70;
-        label('●',224+45*Math.cos(angle),322+11*Math.sin(angle),kind==='goldBeads'?'#ffe276':'#ff994c',11);
+        label('●',224+45*Math.cos(angle),320+14*Math.sin(angle),kind==='goldBeads'?'#ffe276':'#ff994c',18);
       }
     } else if (kind==='rainbow') {
       ['#ff7073','#ffd162','#7bddc0','#9ea8ff'].forEach((hue,index)=>arc(224,344,45-index*8,Math.PI,Math.PI*2,hue,6));
       label('✦',284,318,'#fff1d1',18);
     } else {
       const corner=['search','question','lens','spark','pointSpark','orb','starOrbit','smirk'].includes(kind);
-      const x=corner?355+pulse*7:224;
-      const y=corner?83+5*Math.sin(p*Math.PI*4):327-7*pulse;
-      label(prop[kind]||'✦',x,y,kind==='heart'||kind==='hearts'?'#ff7ba5':color,kind==='heart'?40:29);
+      const x=corner?371+pulse*5:224;
+      const y=corner?83+5*Math.sin(p*Math.PI*4):322-6*pulse;
+      label(prop[kind]||'✦',x,y,kind==='heart'||kind==='hearts'?'#ff7ba5':color,kind==='heart'||kind==='hearts'?67:57);
       if (kind==='starOrbit'||kind==='spark'||kind==='pointSpark') {
         label('✦',84+12*pulse,91,color,18);
         label('·',107,71,color,18);
