@@ -49,22 +49,33 @@
       #transport { min-height:36px; }
       .name { font-size:clamp(16px,4.6vw,23px); }
     }
+    .filters { display:grid; grid-template-columns:1fr 1fr 1.5fr; gap:12px; margin:12px 0 8px; }
+    .filters label { display:grid; gap:5px; font-size:14px; font-weight:650; min-width:0; }
+    .filters input, .filters select { font:inherit; min-width:0; width:100%; min-height:43px; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:9px; padding:8px; }
+    #scene-note { color:var(--muted); font-size:14px; margin:0 0 15px; min-height:21px; }
+    @media(max-width:600px) { .filters {grid-template-columns:1fr 1fr;} .filters label:last-child { grid-column:1/-1; } }
   </style>
 </head>
 <body>
 <main>
-  <header><p class="brand">EVA REMIX</p><h1>炫卡斗士动效对照</h1><p>选一个表情，同时看四位角色的眼神、眉毛和嘴形。</p></header>
+  <header><p class="brand">EVA REMIX</p><h1>炫卡斗士全动作</h1><p>116 项场景，四位角色同步播放。可以按类别、名称和编号找动作。</p></header>
   <div class="toolbar">
     <div class="choices" role="group" aria-label="选择表情">
-      <button type="button" data-action="blink" aria-pressed="true">眨眼</button>
-      <button type="button" data-action="look" aria-pressed="false">左右看</button>
-      <button type="button" data-action="happy" aria-pressed="false">开心</button>
-      <button type="button" data-action="question" aria-pressed="false">疑问</button>
-      <button type="button" data-action="heart" aria-pressed="false">抱心</button>
-      <button type="button" data-action="search" aria-pressed="false">搜索</button>
+      <button type="button" data-action="4" aria-pressed="true">眨眼</button>
+      <button type="button" data-action="22" aria-pressed="false">左右看</button>
+      <button type="button" data-action="50" aria-pressed="false">开心</button>
+      <button type="button" data-action="102" aria-pressed="false">疑问</button>
+      <button type="button" data-action="104" aria-pressed="false">抱心</button>
+      <button type="button" data-action="108" aria-pressed="false">搜索</button>
     </div>
     <button type="button" id="transport" aria-controls="cards" data-playing="false"><span aria-hidden="true" class="icon"></span><span class="transport-label">播放全部</span></button>
   </div>
+  <div class="filters">
+    <label>分类<select id="category"></select></label>
+    <label>搜索<input type="search" id="search" placeholder="动作名称或编号"></label>
+    <label>动作<select id="action"></select></label>
+  </div>
+  <p id="scene-note"></p>
   <div id="cards" class="cards">
     <figure class="card" data-role="blue" style="--accent:#3269f6">
       <div class="screen"><img src="media/blue.png" alt="蓝色双眉中间带有黄色闪电的机甲脸"><span class="fallback">静帧预览</span></div>
@@ -86,12 +97,34 @@
   <p id="status" class="sr-only" role="status" aria-live="polite"></p>
   <noscript>启用 JavaScript 后可以同步播放和切换四个角色的动效。</noscript>
 </main>
+<script src="catalog.js"></script>
 <script>
 'use strict';
 const cards = [...document.querySelectorAll('.card')];
 const buttons = [...document.querySelectorAll('[data-action]')];
 const transport = document.querySelector('#transport');
 const statusLine = document.querySelector('#status');
+const {entries, categories} = window.mechaCatalog;
+const category = document.querySelector('#category');
+const search = document.querySelector('#search');
+const picker = document.querySelector('#action');
+const sceneNote = document.querySelector('#scene-note');
+let selected = entries[3];
+function filter() {
+  const q = search.value.trim().toLowerCase();
+  const matches = entries.filter(row => (!category.value || row.category === category.value)
+    && (row.label.toLowerCase().includes(q) || String(row.id) === q.replace(/^#?0*/, '')));
+  picker.replaceChildren(...matches.map(row => new Option(row.id + ' · ' + row.label, row.id)));
+  picker.disabled = !matches.length;
+  if (!matches.length) picker.add(new Option('没有匹配的动作', ''));
+  else if (matches.includes(selected)) picker.value = selected.id;
+  else select(matches[0]);
+}
+category.add(new Option('全部场景', ''));
+for (const [key, label] of Object.entries(categories)) category.add(new Option(label, key));
+category.addEventListener('change', filter);
+search.addEventListener('input', filter);
+picker.addEventListener('change', () => select(entries.find(row => row.id === Number(picker.value))));
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 let wantsPlayback = !reduced.matches;
 let loading = false;
@@ -150,21 +183,24 @@ function loadClip(card, action, label) {
     video.onloadeddata = () => done(true);
     video.onerror = video.onabort = () => done(false);
   });
-  video.src = 'media/' + card.dataset.role + '-' + action + '.mp4';
+  video.src = 'motions/' + card.dataset.role + '-' + action + '.mp4';
   video.load();
   return {video, ready};
 }
 
-async function select(button) {
+async function select(row) {
+  selected = row;
+  picker.value = row.id;
   const current = ++revision;
-  const label = button.textContent;
-  buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  const label = row.label;
+  sceneNote.textContent = row.oem ? '情境预览 · 实机沿用设备已有的提示' : '编号 ' + row.id + ' · ' + categories[row.category];
+  buttons.forEach(item => item.setAttribute('aria-pressed', String(Number(item.dataset.action) === row.id)));
   pending.forEach(stop);
   clips.forEach(video => video.pause());
   cards.forEach(card => card.querySelector('.screen').setAttribute('aria-busy', 'true'));
   loading = true;
   transportState();
-  const batch = cards.map(card => loadClip(card, button.dataset.action, label));
+  const batch = cards.map(card => loadClip(card, row.id, label));
   pending = batch.map(item => item.video);
   const available = await Promise.all(batch.map(item => item.ready));
   if (current !== revision) return;
@@ -187,7 +223,12 @@ async function select(button) {
   await applyPlayback();
 }
 
-buttons.forEach(button => button.addEventListener('click', () => select(button)));
+buttons.forEach(button => button.addEventListener('click', () => {
+  category.value = '';
+  search.value = '';
+  select(entries.find(row => row.id === Number(button.dataset.action)));
+  filter();
+}));
 transport.addEventListener('click', () => {
   wantsPlayback = !wantsPlayback;
   applyPlayback();
@@ -207,8 +248,9 @@ setInterval(() => {
     if (Math.min(delta, Math.abs(video.duration - delta)) > .09) video.currentTime = lead.currentTime;
   });
 }, 250);
-select(buttons[0]);
+filter();
+select(selected);
 </script>
-<nav style="max-width:1120px;margin:20px auto;padding:12px;text-align:center"><a style="color:#dbedff" href="../">返回风格首页</a>　<a style="color:#dbedff" href="https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.3.0">下载 EVA 角色包</a></nav>
+<nav style="max-width:1120px;margin:20px auto;padding:12px;text-align:center"><a style="color:#dbedff" href="../">返回风格首页</a>　<a style="color:#dbedff" href="https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.4.0">下载 EVA 角色包</a></nav>
 </body>
 </html>
