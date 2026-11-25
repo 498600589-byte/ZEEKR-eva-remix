@@ -2,6 +2,10 @@
 
 [在线浏览 116 项表情](https://498600589-byte.github.io/Zeekr-EVA-remix/library.html#library) · [四款精选 GIF](media/nailoong-four.gif) · [静态对照图](media/preview.png) · [首批关键帧](media/keyframes.png) · [扩展关键帧](media/extended-keyframes.png)
 
+## 大符号实机包
+
+爱心、问号和搜索提示都放大了。下载包内含 75 个表情、开机动画和待绑定画面，已在资源盘副本验证安装与恢复。[下载奶龙 ZIP](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.3.0/eva-nailoong-v2.3.0.zip)
+
 ## 奶龙开机与待绑定
 
 机甲和奶龙是给车里亲子时光准备的。等人、休息时，爸妈可以和孩子一起学 EVA 做表情，猜它接下来会偷瞄、憋笑，还是被自己转晕。

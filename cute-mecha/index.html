@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f1">
+  <title>炫卡斗士 · EVA 动效对照</title>
+  <style>
+    :root { color-scheme:light; --ink:#182022; --muted:#50605e; --line:#c8cdc7; --paper:#f6f5f1; }
+    *, *::before, *::after { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif; }
+    main { width:min(1440px,100%); margin:auto; padding:clamp(22px,4vw,62px) clamp(16px,4vw,58px) 42px; }
+    header { padding-bottom:clamp(18px,3.8vw,48px); }
+    .brand { display:inline-flex; align-items:center; gap:9px; margin:0; font:750 13px/1.3 "Segoe UI",sans-serif; letter-spacing:.13em; }
+    .brand::before { content:""; display:block; width:25px; height:16px; border:2px solid var(--ink); border-radius:6px; background:radial-gradient(ellipse 2px 3.5px at 31% 52%,var(--ink) 96%,transparent),radial-gradient(ellipse 2px 3.5px at 69% 52%,var(--ink) 96%,transparent); }
+    h1 { margin:clamp(20px,3.7vw,48px) 0 9px; font-size:clamp(32px,5.3vw,72px); line-height:1.16; letter-spacing:-.075em; font-weight:850; }
+    header p:last-child { margin:0; color:var(--muted); font-size:clamp(14px,1.3vw,17px); line-height:1.6; }
+    .toolbar { display:flex; justify-content:space-between; align-items:center; gap:12px 20px; flex-wrap:wrap; border-block:1px solid var(--line); padding-block:14px; margin-bottom:clamp(16px,2.1vw,26px); }
+    .choices { display:flex; flex-wrap:wrap; gap:5px; }
+    button { appearance:none; border:0; color:var(--ink); background:transparent; padding:8px clamp(10px,1.35vw,19px); line-height:1.4; font-family:inherit; font-size:15px; font-weight:650; min-height:42px; border-radius:11px; cursor:pointer; }
+    button:hover { background:#e5e8df; }
+    button[aria-pressed="true"] { color:#f7f9f4; background:#20352e; }
+    button:focus-visible { outline:3px solid #16764f; outline-offset:2px; }
+    button:disabled { cursor:default; opacity:.6; }
+    #transport { display:inline-flex; align-items:center; gap:9px; border:1px solid #a9b2a9; background:transparent; padding-inline:12px; }
+    #transport:hover:enabled { background:#e5e8df; }
+    #transport .icon { width:12px; height:13px; background:linear-gradient(to right,currentColor 30%,transparent 30% 65%,currentColor 65%); }
+    #transport[data-playing="false"] .icon { background:currentColor; clip-path:polygon(12% 0,100% 50%,12% 100%); }
+    .cards { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(10px,1.45vw,22px); }
+    .card { min-width:0; margin:0; }
+    .screen { display:grid; overflow:hidden; isolation:isolate; border-radius:clamp(18px,2.1vw,31px); background:#000; aspect-ratio:448/384; position:relative; }
+    .screen > img, .screen > video { grid-area:1/1; width:100%; height:100%; object-fit:contain; display:block; }
+    .screen[aria-busy="true"] { cursor:progress; }
+    .fallback { display:none; position:absolute; left:10px; bottom:8px; color:#fff; background:#353535; border-radius:6px; padding:3px 7px; font-size:12px; }
+    .screen.failed .fallback { display:block; }
+    figcaption { margin:clamp(10px,1.3vw,18px) 3px 0; }
+    .name { display:flex; align-items:center; gap:.48em; font-size:clamp(18px,1.9vw,28px); font-weight:750; letter-spacing:-.05em; }
+    .name::before { content:""; flex-shrink:0; width:.4em; height:.68em; border-radius:50px; background:var(--accent); }
+    .detail { display:block; margin-top:5px; color:var(--muted); font-size:clamp(12px,1.1vw,14px); line-height:1.6; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; border:0; margin:-1px; clip-path:inset(50%); overflow:hidden; white-space:nowrap; }
+    noscript { display:block; padding:12px; font-size:14px; }
+    @media (max-width:900px) {
+      .cards { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:23px; }
+    }
+    @media (max-width:580px) {
+      .toolbar { align-items:flex-start; padding-block:10px; gap:7px; }
+      .choices { flex:1 1 100%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); width:100%; }
+      .choices button { padding-inline:7px; }
+      #transport { min-height:36px; }
+      .name { font-size:clamp(16px,4.6vw,23px); }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header><p class="brand">EVA REMIX</p><h1>炫卡斗士动效对照</h1><p>选一个表情，同时看四位角色的眼神、眉毛和嘴形。</p></header>
+  <div class="toolbar">
+    <div class="choices" role="group" aria-label="选择表情">
+      <button type="button" data-action="blink" aria-pressed="true">眨眼</button>
+      <button type="button" data-action="look" aria-pressed="false">左右看</button>
+      <button type="button" data-action="happy" aria-pressed="false">开心</button>
+      <button type="button" data-action="question" aria-pressed="false">疑问</button>
+      <button type="button" data-action="heart" aria-pressed="false">抱心</button>
+      <button type="button" data-action="search" aria-pressed="false">搜索</button>
+    </div>
+    <button type="button" id="transport" aria-controls="cards" data-playing="false"><span aria-hidden="true" class="icon"></span><span class="transport-label">播放全部</span></button>
+  </div>
+  <div id="cards" class="cards">
+    <figure class="card" data-role="blue" style="--accent:#3269f6">
+      <div class="screen"><img src="media/blue.png" alt="蓝色双眉中间带有黄色闪电的机甲脸"><span class="fallback">静帧预览</span></div>
+      <figcaption><span class="name">炫蓝闪电</span><span class="detail">分片蓝眉 · 黄色颊灯</span></figcaption>
+    </figure>
+    <figure class="card" data-role="orange" style="--accent:#ed7b25">
+      <div class="screen"><img src="media/orange.png" alt="橙色护栏下带有一对格栅面颊的机甲脸"><span class="fallback">静帧预览</span></div>
+      <figcaption><span class="name">巨力风暴</span><span class="detail">护栏眉甲 · 双侧格栅</span></figcaption>
+    </figure>
+    <figure class="card" data-role="medic" style="--accent:#21ab82">
+      <div class="screen"><img src="media/medic.png" alt="白绿面甲搭配琥珀色单眼镜的机甲脸"><span class="fallback">静帧预览</span></div>
+      <figcaption><span class="name">急救卫士</span><span class="detail">琥珀单镜 · 白色下颌</span></figcaption>
+    </figure>
+    <figure class="card" data-role="fire" style="--accent:#e44652">
+      <div class="screen"><img src="media/fire.png" alt="红色羽翼眉下带有暖金色眼睛的机甲脸"><span class="fallback">静帧预览</span></div>
+      <figcaption><span class="name">烈火修罗</span><span class="detail">羽翼红眉 · 暖金眼灯</span></figcaption>
+    </figure>
+  </div>
+  <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+  <noscript>启用 JavaScript 后可以同步播放和切换四个角色的动效。</noscript>
+</main>
+<script>
+'use strict';
+const cards = [...document.querySelectorAll('.card')];
+const buttons = [...document.querySelectorAll('[data-action]')];
+const transport = document.querySelector('#transport');
+const statusLine = document.querySelector('#status');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+let wantsPlayback = !reduced.matches;
+let loading = false;
+let revision = 0;
+let clips = [];
+let pending = [];
+
+function stop(video) {
+  video.pause();
+  video.removeAttribute('src');
+  video.load();
+  video.remove();
+}
+
+function transportState() {
+  const playing = wantsPlayback && clips.length > 0;
+  transport.disabled = loading || !clips.length;
+  transport.dataset.playing = String(playing);
+  transport.querySelector('.transport-label').textContent = playing ? '暂停全部' : '播放全部';
+}
+
+async function applyPlayback() {
+  const current = revision;
+  const group = clips.slice();
+  if (loading || !group.length || !wantsPlayback || document.hidden) {
+    group.forEach(video => video.pause());
+    transportState();
+    return;
+  }
+  const results = await Promise.allSettled(group.map(video => video.play()));
+  if (current !== revision || document.hidden || !wantsPlayback) return;
+  if (results.some(result => result.status === 'rejected')) {
+    group.forEach(video => video.pause());
+    wantsPlayback = false;
+    statusLine.textContent = '已暂停，点击播放全部可重新播放。';
+  }
+  transportState();
+}
+
+function loadClip(card, action, label) {
+  const video = document.createElement('video');
+  video.muted = true;
+  video.playsInline = true;
+  video.loop = true;
+  video.preload = 'auto';
+  video.setAttribute('aria-label', card.querySelector('.name').textContent + ' · ' + label);
+  const ready = new Promise(resolve => {
+    const done = ok => {
+      clearTimeout(timeout);
+      video.onloadeddata = null;
+      video.onerror = null;
+      video.onabort = null;
+      resolve(ok);
+    };
+    const timeout = setTimeout(() => done(false), 12000);
+    video.onloadeddata = () => done(true);
+    video.onerror = video.onabort = () => done(false);
+  });
+  video.src = 'media/' + card.dataset.role + '-' + action + '.mp4';
+  video.load();
+  return {video, ready};
+}
+
+async function select(button) {
+  const current = ++revision;
+  const label = button.textContent;
+  buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  pending.forEach(stop);
+  clips.forEach(video => video.pause());
+  cards.forEach(card => card.querySelector('.screen').setAttribute('aria-busy', 'true'));
+  loading = true;
+  transportState();
+  const batch = cards.map(card => loadClip(card, button.dataset.action, label));
+  pending = batch.map(item => item.video);
+  const available = await Promise.all(batch.map(item => item.ready));
+  if (current !== revision) return;
+  clips.forEach(stop);
+  pending = [];
+  clips = [];
+  cards.forEach((card, i) => {
+    const screen = card.querySelector('.screen');
+    const video = batch[i].video;
+    screen.classList.toggle('failed', !available[i]);
+    screen.setAttribute('aria-busy', 'false');
+    if (available[i]) {
+      screen.insertBefore(video, screen.querySelector('.fallback'));
+      clips.push(video);
+    } else stop(video);
+  });
+  loading = false;
+  const count = cards.length - clips.length;
+  statusLine.textContent = '已切换到' + label + (count ? '，' + count + '个角色显示静帧。' : '。');
+  await applyPlayback();
+}
+
+buttons.forEach(button => button.addEventListener('click', () => select(button)));
+transport.addEventListener('click', () => {
+  wantsPlayback = !wantsPlayback;
+  applyPlayback();
+});
+document.addEventListener('visibilitychange', applyPlayback);
+reduced.addEventListener('change', event => {
+  wantsPlayback = !event.matches;
+  applyPlayback();
+});
+setInterval(() => {
+  if (loading || !wantsPlayback || document.hidden || clips.length < 2) return;
+  const [lead, ...others] = clips;
+  if (lead.paused || lead.seeking) return;
+  others.forEach(video => {
+    if (video.seeking || !Number.isFinite(video.duration)) return;
+    const delta = Math.abs(lead.currentTime - video.currentTime);
+    if (Math.min(delta, Math.abs(video.duration - delta)) > .09) video.currentTime = lead.currentTime;
+  });
+}, 250);
+select(buttons[0]);
+</script>
+<nav style="max-width:1120px;margin:20px auto;padding:12px;text-align:center"><a style="color:#dbedff" href="../">返回风格首页</a>　<a style="color:#dbedff" href="https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.3.0">下载 EVA 角色包</a></nav>
+</body>
+</html>

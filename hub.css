@@ -43,3 +43,13 @@
   .compare-bar { flex-wrap: wrap; align-items: start; }
   .compare-bar button { font-size: 13px; padding-inline: 9px; min-height: 37px; }
 }
+
+.family-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+.family-grid .style-card > a:first-child { display:block; padding:0; }
+.family-grid img { display:block; height:auto; aspect-ratio:7/6; object-fit:contain; background:#000; }
+.family-download { display:inline-block; margin:10px 0 24px; color:#ffd77f; }
+@media(max-width:600px) {
+  .family-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .family-grid article:last-child { grid-column:1/-1; display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-content:center; align-items:center; }
+  .family-grid article:last-child > a:first-child { grid-row:1/4; }
+}
