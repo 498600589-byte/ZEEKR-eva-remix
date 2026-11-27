@@ -2,6 +2,14 @@
 
 [在线浏览 116 项表情](https://498600589-byte.github.io/Zeekr-EVA-remix/library.html#library) · [四款精选 GIF](media/nailoong-four.gif) · [静态对照图](media/preview.png) · [首批关键帧](media/keyframes.png) · [扩展关键帧](media/extended-keyframes.png)
 
+## v2.4.2 奶龙的动作道具
+
+木鱼有开口和软垫，敲击时木槌回弹；奶龙拿起萨克斯时吹嘴贴到嘴边，捧书时书页会翻动。左、右喊话分别把喇叭朝向对应一侧。网页的 101 个带符号场景共用 59 种画法，设备包有 60 项资源更新。
+
+![敲木鱼、吹萨克斯、玩游戏、翻书、双手指向和喇叭喊话](media/nailoong-props.gif)
+
+[下载 v2.4.2 设备包](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.4.2/eva-nailoong-v2.4.2.zip) · [播放敲木鱼](https://498600589-byte.github.io/Zeekr-EVA-remix/library.html?expression=76#library)
+
 ## v2.4.1 提示符号校正
 
 按 EVA 原动作的含义重绘了连接转圈、送风扇叶、木鱼和「功德 +1」、白手套、双手指向、旋转星环、搜索放大镜、蓝色双目镜和分左右方向的紫色喇叭。网页的连接场景使用新图案。实机包包含 75 项表情、开机动画和待绑定画面。
@@ -10,7 +18,7 @@
 
 ## 大符号实机包
 
-爱心、问号和搜索提示都放大了。下载包内含 75 个表情、开机动画和待绑定画面，已在资源盘副本验证安装与恢复。[下载奶龙 ZIP](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.4.1/eva-nailoong-v2.4.1.zip)
+爱心、问号和搜索提示都放大了。下载包内含 75 个表情、开机动画和待绑定画面，已在资源盘副本验证安装与恢复。[下载奶龙 ZIP](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.4.2/eva-nailoong-v2.4.2.zip)
 
 ## 奶龙开机与待绑定
 

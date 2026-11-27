@@ -8,10 +8,10 @@
 
 | 可爱机甲 | 奶龙 | 小猫咪 |
 | --- | --- | --- |
-| <img src="docs/nailoong/cute-mecha/question.gif" width="185" alt="炫蓝闪电歪头提问"> | <img src="docs/nailoong/media/nailoong-heart.png" width="185" alt="奶龙的爱心提示"> | <img src="docs/nailoong/kitten/fish.gif" width="185" alt="小猫咪吃鱼"> |
-| [四角色，各 116 项预览](https://498600589-byte.github.io/Zeekr-EVA-remix/cute-mecha/) | [大符号动效](https://498600589-byte.github.io/Zeekr-EVA-remix/library.html?expression=104#library) | [平面大眼猫 · 八个 60 帧动作](https://498600589-byte.github.io/Zeekr-EVA-remix/kitten/) |
+| <img src="docs/nailoong/cute-mecha/question.gif" width="185" alt="炫蓝闪电歪头提问"> | <img src="docs/nailoong/media/nailoong-wood.gif" width="185" alt="奶龙敲木鱼的设备资源动图"> | <img src="docs/nailoong/kitten/fish.gif" width="185" alt="小猫咪吃鱼"> |
+| [四角色，各 116 项预览](https://498600589-byte.github.io/Zeekr-EVA-remix/cute-mecha/) | [敲木鱼动效](https://498600589-byte.github.io/Zeekr-EVA-remix/library.html?expression=76#library) | [平面大眼猫 · 八个 60 帧动作](https://498600589-byte.github.io/Zeekr-EVA-remix/kitten/) |
 
-[下载大眼猫 v2.3.1](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.3.1) · [v2.3.0 亲子资源包](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.3.0) · [安装与动作对应说明](docs/family-v2.3.md) · [可爱机甲全动作下载与说明](docs/cardbot-full.md)
+[下载奶龙 v2.4.2](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/download/v2.4.2/eva-nailoong-v2.4.2.zip) · [下载大眼猫 v2.3.1](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.3.1) · [v2.3.0 亲子资源包](https://github.com/498600589-byte/Zeekr-EVA-remix/releases/tag/v2.3.0) · [安装与动作对应说明](docs/family-v2.3.md) · [可爱机甲全动作下载与说明](docs/cardbot-full.md)
 
 ### 历史风格对比
 
