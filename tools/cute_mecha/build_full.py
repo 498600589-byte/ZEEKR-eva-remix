@@ -32,7 +32,7 @@ PROTECTED = {1,3,27,33,34,35,36,37,38,40,41,55,56,57,67,68,69,74,75}
 SIX = {4:"blink",22:"look",50:"happy",102:"question",104:"heart",108:"search"}
 COLOR = dict(zip(ROLES,("#74e8ff","#ffc46e","#90fad3","#ffa77a")))
 CUES = {
-    "off":"⚭","scan":"◉","wave":"👋","hand":"👋","hands":"🤲","note":"♫","sax":"🎷",
+    "off":"⚭","connect":"◌","scan":"◉","wave":"👋","hand":"👋","hands":"🤲","note":"♫","sax":"🎷",
     "game":"🎮","zzz":"Zz","power":"⏻","wind":"≋","route":"➜","window":"▣","seat":"🪑",
     "vent":"✣","drop":"💧","battery":"▰","charged":"✓","belt":"╱","speed":"◴","alert":"!",
     "kite":"🪁","apple":"🍎","book":"📖","sunrise":"🌅","sun":"☀","moon":"☾","hearts":"♥",

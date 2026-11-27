@@ -3,7 +3,7 @@ window.evaNailoongCatalog = {
   "entries": [
     {"id":1,"name":"Disconnect","label":"未连接","category":"voice","pose":"bored","symbol":"off","phase":"full"},
     {"id":2,"name":"scjh","label":"蓝紫边框眨眼","category":"voice","pose":"blink","symbol":"scan","phase":"enter"},
-    {"id":3,"name":"ljz","label":"连接中","category":"voice","pose":"listen","symbol":"search","phase":"full"},
+    {"id":3,"name":"ljz","label":"连接中","category":"voice","pose":"listen","symbol":"connect","phase":"full"},
     {"id":4,"name":"Blink","label":"眨眼","category":"mood","pose":"blink","symbol":"","phase":"full"},
     {"id":5,"name":"Boring","label":"无聊","category":"mood","pose":"bored","symbol":"","phase":"full"},
     {"id":6,"name":"DriverListenStart","label":"主驾聆听 · 开始","category":"voice","pose":"listen","symbol":"voice","phase":"enter"},
@@ -110,7 +110,7 @@ window.evaNailoongCatalog = {
     {"id":107,"name":"L00000107","label":"高兴","category":"mood","pose":"laugh","symbol":"spark","phase":"full"},
     {"id":108,"name":"L00000108","label":"搜索","category":"gesture","pose":"scan","symbol":"search","phase":"full"},
     {"id":109,"name":"C00000109","label":"原创补位 · 偷笑","category":"unknown","pose":"glance","symbol":"smirk","phase":"full"},
-    {"id":110,"name":"C00000110","label":"蓝色圆镜片","category":"creative","pose":"scan","symbol":"lens","phase":"full"},
+    {"id":110,"name":"C00000110","label":"蓝色双目镜","category":"creative","pose":"scan","symbol":"lens","phase":"full"},
     {"id":111,"name":"C00000111","label":"紫色喇叭入场","category":"voice","pose":"talk","symbol":"horn","phase":"enter"},
     {"id":112,"name":"C00000112","label":"紫色喇叭喊话","category":"voice","pose":"talk","symbol":"horn","phase":"loop"},
     {"id":113,"name":"C00000113","label":"紫色喇叭退场","category":"voice","pose":"talk","symbol":"horn","phase":"exit"},

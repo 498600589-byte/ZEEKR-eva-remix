@@ -75,12 +75,12 @@
 
   const prop = {
     wave:'👋', hand:'👋', hands:'🤲', note:'♫', sax:'🎷', game:'🎮', zzz:'Z z',
-    power:'⏻', wind:'≋', window:'▣', seat:'💺', vent:'✣', drop:'💧', charged:'✓',
+    power:'⏻', window:'▣', seat:'💺', vent:'✣', drop:'💧', charged:'✓',
     kite:'🪁', apple:'🍎', book:'📖', sunrise:'🌅', sun:'☀', moon:'🌙', hearts:'♥',
     scent:'✿', heat:'♨', bolt:'ϟ', leaf:'🍃', cloud:'☁', headphones:'🎧', drum:'🥁',
     microphone:'🎤', shield:'◈', phone:'☎', cake:'🎂', tools:'🔧', redpacket:'🧧',
-    wood:'♫', orb:'●', point:'☛', pointSpark:'☛', question:'?', search:'⌕',
-    heart:'♥', starOrbit:'✦', smirk:'✧', lens:'◉', horn:'📣', spark:'★',
+    question:'?',
+    heart:'♥', smirk:'✧', spark:'★',
   };
   const moods = {
     alert:'#ff926c', vehicle:'#9be9ca', festival:'#ffd477', mood:'#ffd477',
@@ -148,6 +148,179 @@
     ctx.stroke();
   }
 
+  const TAU = Math.PI * 2;
+
+  function dot(x,y,r,color) {
+    ctx.fillStyle=color;
+    ctx.beginPath();
+    ctx.arc(x,y,r,0,TAU);
+    ctx.fill();
+  }
+
+  function line(points,color,width) {
+    ctx.beginPath();
+    ctx.strokeStyle=color;
+    ctx.lineWidth=width;
+    ctx.lineCap='round';
+    points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));
+    ctx.stroke();
+  }
+
+  function star(x,y,r,color) {
+    ctx.beginPath();
+    ctx.fillStyle=color;
+    for(let i=0;i<8;i++) {
+      const a=i*Math.PI/4;
+      const length=i%2?r*.38:r;
+      const px=x+length*Math.cos(a), py=y+length*Math.sin(a);
+      if(i) ctx.lineTo(px,py);
+      else ctx.moveTo(px,py);
+    }
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function spinner(p,color) {
+    const active=Math.floor(p*16)%8;
+    for(let i=0;i<8;i++) {
+      const angle=i*TAU/8;
+      const distance=(i-active+8)%8;
+      ctx.globalAlpha=1-distance*.105;
+      dot(224+28*Math.cos(angle),298+28*Math.sin(angle),5,color);
+    }
+    ctx.globalAlpha=1;
+    label('连接中',224,350,color,23);
+  }
+
+  function hand(x,y,direction,point) {
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.scale(direction,1);
+    ctx.rotate(-.26);
+    rounded(-17,-2,35,23,9,'#fff2d9');
+    rounded(-9,16,23,9,4,'#b6cbe0');
+    if(point) {
+      rounded(8,-6,32,9,4,'#fff2d9');
+      rounded(-13,-9,10,19,4,'#fff2d9');
+      line([[-1,4],[8,4]],'#c5aa93',2);
+    } else {
+      for(let i=0;i<4;i++) rounded(-13+i*8,-19+Math.abs(1-i)*2,7,24,3,'#fff2d9');
+      rounded(-24,-7,10,18,5,'#fff2d9');
+    }
+    ctx.restore();
+  }
+
+  function drawObjectCue(row,p,pulse) {
+    const x=224, y=323;
+    switch(row.symbol) {
+      case 'connect':
+        spinner(p,'#a2dcff');
+        break;
+      case 'wind':
+        ctx.save();
+        ctx.translate(x,319);
+        ctx.rotate(p*TAU*2);
+        for(let i=0;i<4;i++) {
+          ctx.rotate(TAU/4);
+          rounded(5,-11,28,15,7,'#a2dcff');
+        }
+        ctx.restore();
+        dot(x,319,7,'#fff1cc');
+        for(let i=0;i<3;i++) line([[159-i*6,306+i*13],[183-i*2,306+i*13]],'#78aec4',3);
+        break;
+      case 'wood': {
+        const beat=Math.pow(Math.sin(p*Math.PI*2),4);
+        ctx.fillStyle='#e7a048';
+        ctx.beginPath();
+        ctx.ellipse(x,y,39,19,-.22,0,TAU);
+        ctx.fill();
+        line([[196,326],[243,317]],'#783d24',7);
+        line([[219,300-beat*11],[269,278-beat*22]],'#f4d4a1',5);
+        dot(219,300-beat*11,6,'#ffd171');
+        label('功德 +1',224,361,'#ffe293',18);
+        break;
+      }
+      case 'orb': {
+        const side=row.id===77?-1:1;
+        hand(224+side*(14+15*pulse),322,side,false);
+        dot(side<0?177:271,309,10,'#75caff');
+        dot(side<0?163:285,315,4,'#4a8fe6');
+        break;
+      }
+      case 'point':
+      case 'pointSpark': {
+        const side=Math.sin(p*TAU)>=0?1:-1;
+        hand(201,323,side,true);
+        hand(243,335,side,true);
+        if(row.symbol==='pointSpark') {
+          star(163+10*pulse,299,10,'#ffdc78');
+          star(282-10*pulse,306,13,'#ffdc78');
+        }
+        break;
+      }
+      case 'search': {
+        const sx=367+5*pulse, sy=82+5*Math.sin(p*TAU);
+        dot(sx,sy,23,'#182837');
+        arc(sx,sy,23,0,TAU,'#a2e6ff',6);
+        arc(sx,sy,14,3.64,4.63,'#effbff',3);
+        line([[sx+17,sy+16],[sx+35,sy+35]],'#ffe099',8);
+        break;
+      }
+      case 'lens': {
+        const lift=ease(clamp(p/.31))*ease(clamp((1-p)/.27));
+        const by=324-160*lift;
+        const spacing=36+20*lift;
+        line([[224-spacing,by],[224+spacing,by]],'#76acff',8);
+        for(const bx of [224-spacing,224+spacing]) {
+          dot(bx,by,25,'rgba(115,197,255,.38)');
+          arc(bx,by,25,0,TAU,'#78baff',6);
+          arc(bx,by,16,3.35,4.4,'#fff5de',3);
+        }
+        break;
+      }
+      case 'horn': {
+        const side=row.id>=114?1:-1;
+        ctx.save();
+        ctx.translate(x,y-4+4*Math.sin(p*TAU*2));
+        ctx.scale(side,1);
+        rounded(0,6,14,26,5,'#b797ff');
+        rounded(-29,-9,19,19,5,'#d7c7ff');
+        ctx.fillStyle='#9c72ed';
+        ctx.beginPath();
+        ctx.moveTo(-19,-9);
+        ctx.lineTo(24,-25);
+        ctx.lineTo(24,25);
+        ctx.lineTo(-19,9);
+        ctx.closePath();
+        ctx.fill();
+        dot(24,0,14,'#d4bdff');
+        dot(24,0,7,'#503278');
+        for(let i=-1;i<=1;i++) {
+          line([[44,i*12],[51+pulse*12,i*20]],'#dedafe',3);
+        }
+        ctx.restore();
+        break;
+      }
+      default:
+        return false;
+    }
+    return true;
+  }
+
+  function starRing(p,cy) {
+    ctx.save();
+    ctx.strokeStyle='#fff1cb';
+    ctx.lineWidth=3;
+    ctx.beginPath();
+    ctx.ellipse(224,cy,62,15,-.11,.2,5.7);
+    ctx.stroke();
+    for(let i=0;i<3;i++) {
+      const angle=TAU*(p+i/3);
+      star(224+60*Math.cos(angle),cy+15*Math.sin(angle),7+i,'#ffdc73');
+    }
+    ctx.restore();
+  }
+
   function drawCue(row,p,color) {
     const kind=row.symbol;
     const pulse=(Math.sin(p*Math.PI*4)+1)*.5;
@@ -155,6 +328,10 @@
     if (!kind || !strength) return;
     ctx.save();
     ctx.globalAlpha=strength;
+    if (drawObjectCue(row,p,pulse)) {
+      ctx.restore();
+      return;
+    }
     if (kind==='voice') {
       const side=[9,10,11,101].includes(row.id)?1:-1;
       for (let i=0;i<7;i++) {
@@ -165,7 +342,7 @@
       rounded(191,317,65,27,6,color);
       rounded(257,323,7,15,3,color);
       rounded(195,321,57,19,4,'#0a201a');
-      const level=row.id===33?0.17+p*.65:row.id===35?0.96-p*.15:0.35+pulse*.57;
+      const level=row.id===33?0.17+p*.65:row.id===35?0.96:0.35+pulse*.57;
       rounded(197,323,53*level,15,3,color);
     } else if (kind==='alert' || kind==='belt' || kind==='speed' || kind==='cruise' || kind==='route') {
       rounded(89,313,270,41,12,'#241f25');
@@ -183,17 +360,21 @@
     } else if (kind==='orangeBeads' || kind==='goldBeads') {
       for(let i=0;i<6;i++) {
         const angle=(p*(row.phase==='loop'?2:1))*Math.PI*2+i*.70;
-        label('●',224+45*Math.cos(angle),320+14*Math.sin(angle),kind==='goldBeads'?'#ffe276':'#ff994c',18);
+        dot(224+45*Math.cos(angle),320+14*Math.sin(angle),8,kind==='goldBeads'?'#ffe276':'#ff994c');
       }
+      if (row.id===89 || row.id===92) star(287,305,9,'#ffdc78');
+    } else if (kind==='starOrbit') {
+      starRing(p,57);
     } else if (kind==='rainbow') {
       ['#ff7073','#ffd162','#7bddc0','#9ea8ff'].forEach((hue,index)=>arc(224,344,45-index*8,Math.PI,Math.PI*2,hue,6));
-      label('✦',284,318,'#fff1d1',18);
+      starRing(p,52);
+      star(284,318,11,'#fff1d1');
     } else {
-      const corner=['search','question','lens','spark','pointSpark','orb','starOrbit','smirk'].includes(kind);
+      const corner=['question','spark','smirk'].includes(kind);
       const x=corner?371+pulse*5:224;
       const y=corner?83+5*Math.sin(p*Math.PI*4):322-6*pulse;
       label(prop[kind]||'✦',x,y,kind==='heart'||kind==='hearts'?'#ff7ba5':color,kind==='heart'||kind==='hearts'?67:57);
-      if (kind==='starOrbit'||kind==='spark'||kind==='pointSpark') {
+      if (kind==='spark') {
         label('✦',84+12*pulse,91,color,18);
         label('·',107,71,color,18);
       }
@@ -217,7 +398,8 @@
     const scale=(cue?.89:1)*(1+beat*.022);
     ctx.fillStyle='#000';
     ctx.fillRect(0,0,448,384);
-    const x=224+beat*amplitude*side, y=(cue?155:183)-beat*amplitude;
+    const ring=['rainbow','starOrbit'].includes(selected.symbol);
+    const x=224+beat*amplitude*side, y=(ring?177:cue?155:183)-beat*amplitude;
     const tilt=beat*(selected.pose==='dance'?.085:.025);
     paintFace(poses[current],poses[current+1],blend,x,y,scale,tilt);
     drawCue(selected,p,moods[selected.category]);
